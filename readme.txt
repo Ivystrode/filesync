@@ -1,5 +1,14 @@
 Program to backup files to offsite locations
 
+CURRENT BEST WORKING STATE:
+compress folder into archive, send and decompress on other end as named folder
+
+Issues:
+1. Will then have to either
+    a. Delete old backup on/before receipt of new backup archive
+    b. Keep both/all backups - check if space is getting too full and then delete older backups
+    I like option b.
+
 sendthis directories gitignored
 use sendthis folders to send files, dont include test files in git commits
 

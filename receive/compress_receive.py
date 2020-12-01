@@ -4,6 +4,7 @@ import socket
 from tqdm import tqdm
 import tarfile
 import os
+from datetime import datetime
 import shutil
 
 # device's ip address
@@ -81,8 +82,14 @@ with open(filename, "wb") as f: # note different read/write mode!!!
         # update progress bar
         progress.update(len(bytes_read))
         
-# decompress the file
-decompress(f"{filename}", "received_files")
+
+backup_date = datetime.now().strftime("%Y_%m_%d")
+backup_name = f"{backup_date}_backup"
+
+# extract archive contents into dated backup folder
+decompress(f"{filename}", backup_name)
+# delete archive
+os.remove(filename)
 
 # close the client socket
 client_socket.close()

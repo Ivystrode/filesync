@@ -28,8 +28,8 @@ SEPARATOR = "<SEPARATOR>"
 BUFFER_SIZE = 4096
 
 # ip address or hostname of server (the receiver)
-host = "192.168.0.16" # for raspberry pi
-# host = "10.248.220.31"
+# host = "192.168.0.16" # for raspberry pi
+host = "10.248.220.31"
 # port
 port = 5001 # pick the right port for OMV or whatever the pi ends up being on
 
