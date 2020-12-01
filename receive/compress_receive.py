@@ -1,7 +1,8 @@
 # SERVER SIDE
 
 import socket
-import tqdm
+from tqdm import tqdm
+import tarfile
 import os
 import shutil
 
@@ -21,24 +22,26 @@ s = socket.socket()
 s.bind((SERVER_HOST, SERVER_PORT))
 
 # set the primary backup directory
-backup_dir = os.getcwd()
-backup_dir = backup_dir + "\\"
-print(f"BACKUP DIR IS {backup_dir}")
+# backup_dir = os.getcwd()
+# backup_dir = backup_dir + "\\"
+# print(f"BACKUP DIR IS {backup_dir}")
 
-# File sort function
-# once file is received, it sorts it into the correct path
-# to correspond with the path of the sender
-def sort_file(path, filename):
-    destination_file = backup_dir + path.replace('/', '\\')  
-    destination_folder = destination_file.replace(filename, "")
-    filename = os.getcwd() + '\\' + filename
+# decompress the received archive
+def decompress(tar_file, path, members=None):
+    """Extracts tar file and puts the members to path. If members is none all
+    members will be extracted"""
+    tar = tarfile.open(tar_file, mode="r:gz")
+    if members is None:
+        members = tar.getmembers()
     
-    print(f"\nSorting: {filename} to: \n{destination_file}\n")
-    if not os.path.exists(destination_folder):
-        os.mkdir(destination_folder)
-        print("folder made")
-    shutil.move(filename, destination_file)
-    print("Moved")
+    progress = tqdm(members)
+    for member in progress:
+        tar.extract(member, path=path)
+        progress.set_description(f"Extracting{member}")
+        # or use tar.extractall(members=members, path=path)
+    
+    #close the file
+    tar.close()
 
 # enabling our server to accept connections
 # 5 here is the number of unaccepted connections the system will allow
@@ -63,7 +66,7 @@ filesize = int(filesize)
 
 # start receiving the file from the socket
 # and writing to the file stream
-progress = tqdm.tqdm(range(filesize), f"Receiving {filename}", unit="B", unit_scale=True, unit_divisor=1024)
+progress = tqdm(range(filesize), f"Receiving {filename}", unit="B", unit_scale=True, unit_divisor=1024)
 with open(filename, "wb") as f: # note different read/write mode!!!
     for _ in progress:
         # read 1024 bytes from the socket (receive)
@@ -78,8 +81,8 @@ with open(filename, "wb") as f: # note different read/write mode!!!
         # update progress bar
         progress.update(len(bytes_read))
         
-# sort the file
-sort_file(path, filename)
+# decompress the file
+decompress(f"{filename}", "received_files")
 
 # close the client socket
 client_socket.close()
