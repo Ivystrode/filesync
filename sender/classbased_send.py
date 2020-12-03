@@ -7,11 +7,94 @@ import os
 
 class Transmitter():
     
-    def __init__(self, host, port):
+    def __init__(self, host, port, backup_day, backup_timerange):
         self.host = host
         self.port = port
+        self.backup_day = backup_day
+        self.backup_timerange = backup_timerange
         self.SEPARATOR = "<SEPARATOR>"
         self.BUFFER_SIZE = 4096
+        
+        self.weekdays = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday']
+        
+        if port > 65535:
+            print("\n[!] Invalid Port\n")
+            exit()
+            
+        if type(backup_day) != list:
+            print("\n[!] Invalid Day/s\n")
+            print("Backup day/s must be entered as a list even if only 1 day")
+            exit()
+            
+        for day in self.backup_day:
+            if day.lower() not in self.weekdays:
+                print("\n[!] Invalid Backup Day\n")
+                exit()
+                
+            
+        
+    def backup_scheduler(self):    
+        """
+        Takes a day or list of days and a tuple containing two times that represent
+        the backup time window on each backup day. Checks if the two times are valid
+        before continuing.
+        """
+        backup_complete = False
+    
+        while True:
+            timenow = datetime.now().strftime("%H%M")
+            
+            while not backup_complete:
+                valid_timerange = False
+                for timing in self.backup_timerange:
+                    try:
+                        datetime.strptime(timing, "%H%M")
+                        valid_timerange = True
+                    except:
+                        valid_timerange = False
+                        break
+            
+                if valid_timerange:
+                    
+                    date_today = datetime.now().strftime("%d-%m-%Y")
+                    weekday_number = datetime.strptime(date_today, '%d-%m-%Y').weekday()
+                    today = calendar.day_name[weekday_number]
+                    
+                    for day in self.backup_day:
+                        if day.lower() == today.lower():
+                            print(f"{day}: Backup today")
+                            
+                            if self.backup_timerange[0] <= datetime.now().strftime("%H%M") < self.backup_timerange[1]:
+                                print("[+] Backup window open")
+                                
+                                try:    
+                                    print("[*] Beginning backup")
+                                    # self.start_backup()
+                                    backup_complete = True
+                                    print("[+] Backup complete")
+                                    
+                                except Exception as err:
+                                    print("[!] BACKUP ERROR:")
+                                    print(err)
+                            else:
+                                print("Waiting for backup window...")
+                                    
+                        # else:
+                        #     print(f"{day}: No backup today")
+                        
+                else:
+                    print("\n[!] Invalid backup time range\n")
+                    print("Time range must be a tuple containing a start time and end time in 24hr format")
+                    print("For example: ('1300', 1400')")
+                    exit()
+                        
+                time.sleep(5)
+            
+            if timenow >= self.backup_timerange[1] and backup_complete:
+                print("Backup window closed")
+                backup_complete = False
+                
+            time.sleep(5)
 
     def create_manifest_proposal(self):
         """
@@ -37,7 +120,7 @@ class Transmitter():
         """
         s = socket.socket()
 
-        print(f"[-] Connecting to: {self.host}:{self.port}")
+        print(f"[*] Connecting to: {self.host}:{self.port}")
         s.connect((self.host,self.port))
         print("[+] connected\n")
         
@@ -86,85 +169,16 @@ class Transmitter():
         self.terminate()
 
     def terminate(self):
-        print("[-] File transmit complete, informing receiver")
+        print("[*] File transmit complete, informing receiver")
         time.sleep(1)
         self.sendfile('SENDCOMPLETE')
         
-        print("[-] Terminate command sent")
+        print("[*] Terminate command sent")
         print(f"[-] Closing connection to: {self.host}:{self.port}")
-
-def backup_scheduler(backup_day, backup_time):    
-    """
-    Takes a day or list of days and a tuple containing two times that represent
-    the backup time window on each backup day. Checks if the two times are valid
-    before continuing.
-    """
-    
-    valid_timerange = False
-    for time in backup_time:
-        try:
-            datetime.strptime(time, "%H%M")
-            valid_timerange = True
-        except:
-            print("Invalid backup time range")
-            valid_timerange = False
-            break
-    
-    
-    if valid_timerange:
-        
-        date_today = datetime.now().strftime("%d-%m-%Y")
-        weekday_number = datetime.strptime(date_today, '%d-%m-%Y').weekday()
-        today = calendar.day_name[weekday_number]
-        
-        # print(today)
-        # print(backup_time[0])
-        # print(backup_time[1])
-        # print(datetime.now().strftime("%H%M"))
-        
-        if today.lower() == backup_day.lower():
-            print("Its backup day...")
-            if datetime.now().strftime("%H%M") < backup_time[1] >= backup_time[0]:
-                print("It's backup time boys!")
-                return True
-        else:
-            print("No backup right now")
-            return False
-    else:
-        print("Invalid backup time range")
-        return False
     
 
 if __name__ == '__main__':
-    backup_complete = False
-    start_time = "1030"
-    finish_time = "1255"
-    
-    while True:
-        timenow = datetime.now().strftime("%H%M")
-        
-        while not backup_complete:
-            if backup_scheduler('thursday', (start_time, finish_time)):
-                try:    
-                    print("Backup time!!")
-                    backup = Transmitter("10.248.220.31", 5001)
-                    backup.start_backup()
-                    backup_complete = True
-                    print("Backup complete")
-                    
-                except Exception as err:
-                    print("BACKUP ERROR:")
-                    print(err)
-                    
-            else:
-                print("Not scheduled to do a backup at thsi moment")
-                
-            time.sleep(1)
-            
-        if timenow >= finish_time and backup_complete:
-            print("Backup window over")
-            print("Waiting for next window")
-            backup_complete = False
-            
-        time.sleep(1)
+    backup = Transmitter("10.248.220.31", 5001, ['thursday', 'friday'], ("1351", "1352"))
+    backup.backup_scheduler()
+
         
