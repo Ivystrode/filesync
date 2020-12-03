@@ -1,7 +1,8 @@
 import socket
 import tqdm
 import time
-from datetime import datetime
+from datetime import datetime, date
+import calendar
 import os
 
 class Transmitter():
@@ -92,11 +93,78 @@ class Transmitter():
         print("[-] Terminate command sent")
         print(f"[-] Closing connection to: {self.host}:{self.port}")
 
+def backup_scheduler(backup_day, backup_time):    
+    """
+    Takes a day or list of days and a tuple containing two times that represent
+    the backup time window on each backup day. Checks if the two times are valid
+    before continuing.
+    """
+    
+    valid_timerange = False
+    for time in backup_time:
+        try:
+            datetime.strptime(time, "%H%M")
+            valid_timerange = True
+        except:
+            print("Invalid backup time range")
+            valid_timerange = False
+            break
+    
+    
+    if valid_timerange:
+        
+        date_today = datetime.now().strftime("%d-%m-%Y")
+        weekday_number = datetime.strptime(date_today, '%d-%m-%Y').weekday()
+        today = calendar.day_name[weekday_number]
+        
+        # print(today)
+        # print(backup_time[0])
+        # print(backup_time[1])
+        # print(datetime.now().strftime("%H%M"))
+        
+        if today.lower() == backup_day.lower():
+            print("Its backup day...")
+            if datetime.now().strftime("%H%M") < backup_time[1] >= backup_time[0]:
+                print("It's backup time boys!")
+                return True
+        else:
+            print("No backup right now")
+            return False
+    else:
+        print("Invalid backup time range")
+        return False
+    
 
 if __name__ == '__main__':
-    try:    
-        backup = Transmitter("10.248.220.31", 5001)
-        backup.start_backup()
-    except Exception as err:
-        print("BACKUP ERROR:")
-        print(err)
+    backup_complete = False
+    start_time = "1030"
+    finish_time = "1255"
+    
+    while True:
+        timenow = datetime.now().strftime("%H%M")
+        
+        while not backup_complete:
+            if backup_scheduler('thursday', (start_time, finish_time)):
+                try:    
+                    print("Backup time!!")
+                    backup = Transmitter("10.248.220.31", 5001)
+                    backup.start_backup()
+                    backup_complete = True
+                    print("Backup complete")
+                    
+                except Exception as err:
+                    print("BACKUP ERROR:")
+                    print(err)
+                    
+            else:
+                print("Not scheduled to do a backup at thsi moment")
+                
+            time.sleep(1)
+            
+        if timenow >= finish_time and backup_complete:
+            print("Backup window over")
+            print("Waiting for next window")
+            backup_complete = False
+            
+        time.sleep(1)
+        
