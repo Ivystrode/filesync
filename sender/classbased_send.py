@@ -12,6 +12,7 @@ class Transmitter():
         self.port = port
         self.backup_day = backup_day
         self.backup_timerange = backup_timerange
+        self.backup_dir = 'pi-sendthis'
         self.SEPARATOR = "<SEPARATOR>"
         self.BUFFER_SIZE = 4096
         
@@ -76,9 +77,11 @@ class Transmitter():
                             if self.backup_timerange[0] <= datetime.now().strftime("%H%M") < self.backup_timerange[1]:
                                 print("[+] Backup window open")
                                 
+                                
                                 try:    
                                     print("[*] Beginning backup")
-                                    self.start_backup()
+                                    server_manifest = self.create_manifest_proposal()
+                                    self.start_backup(server_manifest)
                                     backup_complete = True
                                     print("[+] Backup complete")
                                     
@@ -114,18 +117,56 @@ class Transmitter():
         to determine which files to send
         """
         
-        for item in os.walk('sendthis'):
+        print("[*] Writing manifest")
+        for item in os.walk(self.backup_dir):
             if len(item[2]) > 0:
                 for file in item[2]:
                     file_namepath = item[0] + "\\" + file
                     file_modded_date =  time.ctime(os.path.getmtime(item[0] + "\\" + file))
+                    # file_modded_date =  os.path.getmtime(item[0] + "\\" + file)
                     with open("proposed_manifest.txt", "a") as f:
-                        f.write(f"('{file_namepath}', '{file_modded_date}')\n")
+                        f.write(f"{file_namepath}, {file_modded_date}\n")
                         
-        self.check_server_manifest()
+        print("[*] Sending proposed manifest to server...")
+        self.sendfile("proposed_manifest.txt")
+        print("[+] Proposed manifest sent")
+        server_manifest = self.check_server_manifest()
+        return server_manifest
                         
     def check_server_manifest(self):
-        print("Check required files")
+        """
+        Once the required file manifest is received from the server, 
+        check it and use it to only send the files the server requested
+        """
+        
+        s = socket.socket()
+        s.bind(('0.0.0.0', 5002))
+        s.listen(5)
+        print("[*] Awaiting server manifest...")
+        
+        server_socket, address = s.accept()
+        print(f"[+] Incoming data from {address}")
+        
+        received = server_socket.recv(self.BUFFER_SIZE).decode()
+        path, filesize = received.split(self.SEPARATOR)
+        
+        filename = os.path.basename(path)
+        filesize = int(filesize)
+        
+        progress = tqdm.tqdm(range(filesize), f"Receiving {filename}", unit="B", unit_scale=True, unit_divisor=1024)
+        with open(filename, "wb") as f: 
+            for _ in progress:
+                bytes_read = server_socket.recv(self.BUFFER_SIZE)
+                if not bytes_read:
+                    
+                    break
+                f.write(bytes_read)
+                progress.update(len(bytes_read))
+        server_manifest = filename
+        print("[+] Server manifest received")
+        print(server_manifest)
+        
+        return server_manifest
                         
 
     def sendfile(self, filename):
@@ -138,7 +179,7 @@ class Transmitter():
         s.connect((self.host,self.port))
         print("[+] connected\n")
         
-        if filename != "SENDCOMPLETE":
+        if "SENDCOMPLETE" not in filename and "proposed_manifest" not in filename:
             filesize = os.path.getsize(filename)
         else:
             filesize = 10
@@ -160,29 +201,42 @@ class Transmitter():
             print("\nFile sent: " + filename)
         s.close()
         
-    def start_backup(self):
-        for item in os.walk('sendthis'):
-            if len(item[2]) > 0: # there are files in this directory!
-                for file in item[2]:
-                    file_namepath = item[0] + "\\" + file
+    def start_backup(self, server_manifest):
+        """
+        Starting from the backup directory, recursively goes through the folders and sends all files
+        """
+        
+        # THIS WILL HAVE TO CHANGE TO FOR FILE IN SERVER_MANIFEST!!
+        with open(server_manifest, "r") as sfile:
+            for line in sfile.readlines():
+                file = line.strip()
+                if os.path.exists(file):
+                    print("yes it exists")
                     try:
-                        print(file_namepath)
-                        self.sendfile(file_namepath)
+                        print(file)
+                        self.sendfile(file)
                         print("[+] SENT ON ATTEMPT 1\n")
                     except:
-                        for interval in range(1,300):
+                        for interval in range(1,60):
                             try:
                                 print(f"\n[!] Connection busy, retrying in {str(interval)} seconds...\n")
                                 time.sleep(interval)
-                                self.sendfile(file_namepath)
+                                self.sendfile(file)
                                 print(f"[+] SENT ON ATTEMPT {str(interval+1)}")
                                 break
                             except:
                                 print("\n[!] FILE NOT SENT\n")
                                 pass
-        self.terminate()
+                else:
+                    print("Cant find it...")
+                            
+            self.terminate()
 
     def terminate(self):
+        """
+        Once the backup process is complete, let the receiver know to stop listening.
+        """
+        
         print("[*] File transmit complete, informing receiver")
         time.sleep(1)
         self.sendfile('SENDCOMPLETE')
@@ -192,7 +246,7 @@ class Transmitter():
     
 
 if __name__ == '__main__':
-    backup = Transmitter("10.248.220.31", 5001, ['thursday', 'sunday'], ("1415", "1430"))
+    backup = Transmitter("192.168.0.16", 5001, ['thursday', 'sunday'], ("1728", "1800"))
     backup.run_scheduler()
 
         
