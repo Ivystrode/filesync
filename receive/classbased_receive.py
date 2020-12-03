@@ -111,16 +111,6 @@ class Receiver():
         destination_folder = os.getcwd() + "/" + destination_file.replace(filename, "")
         
         
-        print("===")
-        print(path)
-        print(filename)
-        print(destination_file)
-        print(destination_folder)
-        print("===")
-        
-        
-        # filename = os.getcwd() + '/' + filename.replace("\\", "/")
-        
         print(f"\nSorting: {filename} to: \n{destination_file}\n")
         if not os.path.exists(destination_folder):
             os.mkdir(destination_folder)
@@ -172,7 +162,6 @@ class Receiver():
 
                 self.sort_file(path, filename)
         s.close()
-            # s.shutdown(2)
         
 if __name__ == '__main__':
     backup = Receiver("0.0.0.0", 5001, 'pi-sendthis')
