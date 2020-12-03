@@ -6,6 +6,7 @@ import os
 SEPARATOR = "<SEPARATOR>"
 BUFFER_SIZE = 4096
 
+# eventually make this into a class called "transmitter"
 # host = "192.168.0.16" # for raspberry pi if on vpn
 host = "10.248.220.31"
 port = 5001 

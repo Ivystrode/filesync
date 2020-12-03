@@ -33,14 +33,8 @@ def sort_file(path, filename):
     
 def close_connection(client_socket, s):
     print("Terminate command received")
-    print("======================")
-    print("======================")
-    print("======================")
     client_socket.close()
-    print("======================")
-    print("======================")
     s.close()
-    print("======================")
     
 
 while True:
