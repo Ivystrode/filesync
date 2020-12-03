@@ -24,16 +24,25 @@ class Transmitter():
         if type(backup_day) != list:
             print("\n[!] Invalid Day/s\n")
             print("Backup day/s must be entered as a list even if only 1 day")
+            print("Enter 'daily' to backup every day in the alloted time window")
             exit()
             
-        for day in self.backup_day:
-            if day.lower() not in self.weekdays:
-                print("\n[!] Invalid Backup Day\n")
-                exit()
+        if "daily" not in self.backup_day:
+            for day in self.backup_day:
+                if day.lower() not in self.weekdays:
+                    print(f"\n[!] Invalid Backup Day: {day}\n")
+                    exit()
+        else:
+            self.backup_day = self.weekdays
+            print("\n[!] Backups will occur daily\n")
+            print(self.backup_day)
                 
-            
+        if backup_timerange[0] >= backup_timerange[1]:
+            print("\n[!] Invalid Time Range\n")
+            print("The start time must be earlier than the finish time")
+            exit()
         
-    def backup_scheduler(self):    
+    def run_scheduler(self):    
         """
         Takes a day or list of days and a tuple containing two times that represent
         the backup time window on each backup day. Checks if the two times are valid
@@ -69,7 +78,7 @@ class Transmitter():
                                 
                                 try:    
                                     print("[*] Beginning backup")
-                                    # self.start_backup()
+                                    self.start_backup()
                                     backup_complete = True
                                     print("[+] Backup complete")
                                     
@@ -112,6 +121,11 @@ class Transmitter():
                     file_modded_date =  time.ctime(os.path.getmtime(item[0] + "\\" + file))
                     with open("proposed_manifest.txt", "a") as f:
                         f.write(f"('{file_namepath}', '{file_modded_date}')\n")
+                        
+        self.check_server_manifest()
+                        
+    def check_server_manifest(self):
+        print("Check required files")
                         
 
     def sendfile(self, filename):
@@ -178,7 +192,7 @@ class Transmitter():
     
 
 if __name__ == '__main__':
-    backup = Transmitter("10.248.220.31", 5001, ['thursday', 'friday'], ("1351", "1352"))
-    backup.backup_scheduler()
+    backup = Transmitter("10.248.220.31", 5001, ['thursday', 'sunday'], ("1415", "1430"))
+    backup.run_scheduler()
 
         

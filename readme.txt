@@ -3,7 +3,7 @@ Program to backup files to offsite locations
 - NOTE - rsync may be easier and safer for this. However this may be a way to transmit the IP address of this server to another server and vice versa by sending it in a text file...
 
 CURRENT BEST WORKING STATE:
-using os walker multisend3 can send to multireceive dir with subdirs and files in each dir
+Transmitter class takes host, port, list of days to back up and time range in a tuple and then runs scheduled backups
 
 sendthis directories gitignored
 use sendthis folders to send files, dont include test files in git commits
