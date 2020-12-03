@@ -175,8 +175,13 @@ class Transmitter():
         """
         s = socket.socket()
 
-        print(f"[*] Connecting to: {self.host}:{self.port}")
-        s.connect((self.host,self.port))
+        # print(f"[*] Connecting to: {self.host}:{self.port}")
+        if "proposed_manifest" in filename:
+            s.connect((self.host, 5002))
+            print(f"[*] Connecting to: {self.host}:5002")
+        else:
+            s.connect((self.host,self.port))
+            print(f"[*] Connecting to: {self.host}:{self.port}")
         print("[+] connected\n")
         
         if "SENDCOMPLETE" not in filename and "proposed_manifest" not in filename:
@@ -246,7 +251,7 @@ class Transmitter():
     
 
 if __name__ == '__main__':
-    backup = Transmitter("192.168.0.16", 5001, ['thursday', 'sunday'], ("1728", "1800"))
+    backup = Transmitter("192.168.0.16", 5001, ['thursday', 'sunday'], ("2109", "2359"))
     backup.run_scheduler()
 
         

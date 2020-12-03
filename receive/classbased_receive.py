@@ -4,6 +4,7 @@ import tarfile
 import os
 from datetime import datetime
 import shutil
+import ntpath
 
 class Receiver():
     
@@ -22,7 +23,7 @@ class Receiver():
         
     def start(self):
         s = socket.socket()
-        s.bind((self.SERVER_HOST, self.SERVER_PORT))
+        s.bind((self.SERVER_HOST, 5002))
         s.listen(5)
         
         client_socket, address = s.accept()
@@ -104,10 +105,21 @@ class Receiver():
         s.close()
 
     def sort_file(self, path, filename):
-        # destination_file = self.backup_dir + path.replace('/', '\\')  
-        destination_file = path.replace('/', '\\')  
-        destination_folder = destination_file.replace(filename, "")
-        filename = os.getcwd() + '\\' + filename
+        filename = filename.replace('\\', '/')
+        destination_file = self.backup_dir + path 
+        destination_file = path.replace('\\', '/')  
+        destination_folder = os.getcwd() + "/" + destination_file.replace(filename, "")
+        
+        
+        print("===")
+        print(path)
+        print(filename)
+        print(destination_file)
+        print(destination_folder)
+        print("===")
+        
+        
+        # filename = os.getcwd() + '/' + filename.replace("\\", "/")
         
         print(f"\nSorting: {filename} to: \n{destination_file}\n")
         if not os.path.exists(destination_folder):
@@ -123,14 +135,14 @@ class Receiver():
         
     def receive(self):
         print("[+] Standing by to receive files...")
+        # while True:
+        print(self.SERVER_HOST)
+        print(self.SERVER_PORT)
+        s = socket.socket()
+        s.bind((self.SERVER_HOST, self.SERVER_PORT))
+        s.listen(5)
+        print(f"[*] Listening as {self.SERVER_HOST}:{self.SERVER_PORT}")
         while True:
-            print(self.SERVER_HOST)
-            print(self.SERVER_PORT)
-            s = socket.socket()
-            s.bind((self.SERVER_HOST, self.SERVER_PORT))
-            s.listen(5)
-            print(f"[*] Listening as {self.SERVER_HOST}:{self.SERVER_PORT}")
-
             client_socket, address = s.accept()
             print(f"[+] {address} connected!!")
 
@@ -138,6 +150,8 @@ class Receiver():
             path, filesize = received.split(self.SEPARATOR)
             # remove the absolute path if there is - may not have to do this for the sync but should check and figure out how to ensure we get the same folder/file tree
             filename = os.path.basename(path)
+            # try this to work on linux
+            filename = ntpath.basename(path)
             # convert to integer
             filesize = int(filesize)
             
@@ -157,7 +171,9 @@ class Receiver():
                         progress.update(len(bytes_read))
 
                 self.sort_file(path, filename)
+        s.close()
+            # s.shutdown(2)
         
 if __name__ == '__main__':
-    backup = Receiver("0.0.0.0", 5001, 'sendthis')
+    backup = Receiver("0.0.0.0", 5001, 'pi-sendthis')
     backup.start()
