@@ -7,12 +7,12 @@ import os
 
 class Transmitter():
     
-    def __init__(self, host, port, backup_day, backup_timerange):
+    def __init__(self, host, port, backup_day, backup_timerange, backup_dir):
         self.host = host
         self.port = port
         self.backup_day = backup_day
         self.backup_timerange = backup_timerange
-        self.backup_dir = 'pi-sendthis'
+        self.backup_dir = backup_dir
         self.SEPARATOR = "<SEPARATOR>"
         self.BUFFER_SIZE = 4096
         
@@ -215,6 +215,9 @@ class Transmitter():
         with open(server_manifest, "r") as sfile:
             for line in sfile.readlines():
                 file = line.strip()
+                if "Server up to date" in file:
+                    print("[!] Server is already up to date, terminating backup operations")
+                    break
                 if os.path.exists(file):
                     print("yes it exists")
                     try:
@@ -234,6 +237,7 @@ class Transmitter():
                                 pass
                 else:
                     print("Cant find it...")
+                time.sleep(0.1)
                             
             self.terminate()
 
@@ -251,7 +255,11 @@ class Transmitter():
     
 
 if __name__ == '__main__':
-    backup = Transmitter("192.168.0.16", 5001, ['thursday', 'sunday'], ("2109", "2359"))
+    backup = Transmitter("192.168.0.16", 
+                         5001, 
+                         ['thursday', 'sunday'], 
+                         ("2109", "2359"), 
+                         "to_linux_sendthis")
     backup.run_scheduler()
 
         

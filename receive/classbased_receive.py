@@ -5,6 +5,7 @@ import os
 from datetime import datetime
 import shutil
 import ntpath
+import time
 
 class Receiver():
     
@@ -20,6 +21,8 @@ class Receiver():
 
         self.backup_dir = backup_dir + "\\"
         print(f"BACKUP DIR IS {self.backup_dir}")
+        # if not os.path.exists(self.backup_dir):
+        #     os.mkdirs
         
     def start(self):
         s = socket.socket()
@@ -66,15 +69,25 @@ class Receiver():
         
         server_manifest_file = "server_manifest.txt"
         
+        with open(server_manifest_file, "w") as s:
+            s.write("")
+        
         with open(proposed_manifest, "r") as pfile:
             for line in pfile.readlines():
                 file = tuple(line.split(", "))
-                if os.path.isfile(file[0]):
-                    print(f"{file[0]} is present")
+                file_name = file[0].replace("\\", "/")
+                if os.path.isfile(file_name):
+                    # print(f"{file_name} is present")
+                    pass
                 else:
-                    print(f"{file[0]} is ABSENT")
+                    # print(f"{file_name} is ABSENT")
                     with open(server_manifest_file, "a") as sfile:
-                        sfile.write(file[0] + "\n")
+                        sfile.write(file_name + "\n")
+                        time.sleep(0.1)
+        
+        if not os.path.exists(server_manifest_file):
+            with open(server_manifest_file, "w") as sfile:
+                sfile.write("Server up to date")
         
                                     
         return server_manifest_file
@@ -113,7 +126,7 @@ class Receiver():
         
         print(f"\nSorting: {filename} to: \n{destination_file}\n")
         if not os.path.exists(destination_folder):
-            os.mkdir(destination_folder)
+            os.makedirs(destination_folder)
             print("folder made")
         shutil.move(filename, destination_file)
         print("Moved")
@@ -136,7 +149,11 @@ class Receiver():
             client_socket, address = s.accept()
             print(f"[+] {address} connected!!")
 
-            received = client_socket.recv(self.BUFFER_SIZE).decode()
+            try:
+                received = client_socket.recv(self.BUFFER_SIZE).decode()
+            except:
+                received = client_socket.recv(self.BUFFER_SIZE).decode("iso-8859-1")
+                
             path, filesize = received.split(self.SEPARATOR)
             # remove the absolute path if there is - may not have to do this for the sync but should check and figure out how to ensure we get the same folder/file tree
             filename = os.path.basename(path)
@@ -164,5 +181,5 @@ class Receiver():
         s.close()
         
 if __name__ == '__main__':
-    backup = Receiver("0.0.0.0", 5001, 'pi-sendthis')
+    backup = Receiver("0.0.0.0", 5001, 'to_linux_sendthis')
     backup.start()
