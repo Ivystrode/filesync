@@ -67,11 +67,14 @@ class Receiver():
     def check_proposed_manifest(self, proposed_manifest):
         print(f"[*] Checking proposed manifest: {proposed_manifest}...")
         
-        server_manifest_file = "server_manifest.txt"
+        server_manifest_file = "server_manifest.txt" # eventually give this a dated name
         
-        with open(server_manifest_file, "w") as s:
+        with open(server_manifest_file, "w") as s: # I think I should remove this so that the below works...
             s.write("")
         
+        # for some reason this writes each file to the manifest several times
+        # or at least the sender sends the file several times
+        # why does it do this?
         with open(proposed_manifest, "r") as pfile:
             for line in pfile.readlines():
                 file = tuple(line.split(", "))
@@ -80,12 +83,14 @@ class Receiver():
                     # print(f"{file_name} is present")
                     pass
                 else:
-                    # print(f"{file_name} is ABSENT")
+                    print(f"Adding: {file_name} to server manifest")
                     with open(server_manifest_file, "a") as sfile:
                         sfile.write(file_name + "\n")
                         time.sleep(0.1)
         
         if not os.path.exists(server_manifest_file):
+            print("[-] No files required")
+            print("[*] Inform client that server is up to date")
             with open(server_manifest_file, "w") as sfile:
                 sfile.write("Server up to date")
         

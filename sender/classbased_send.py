@@ -79,6 +79,8 @@ class Transmitter():
                                 
                                 
                                 try:    
+                                    # add this try/except block to a separate function so that a backup can be run singly rather than on a schedule
+                                    # as well, so that user has another option/mthod of backup
                                     print("[*] Beginning backup")
                                     server_manifest = self.create_manifest_proposal()
                                     self.start_backup(server_manifest)
