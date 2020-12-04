@@ -19,6 +19,7 @@ To do
     - Script will attempt to delete unknown file
     - Second warning message will be sent if script seems to be successful in deleting it
     - Separate thread can detect an emergency shutdown message from telegram
+- Add file encryption/decryption?
 
 - log file
 backup/sync will happen at regular intervals. at the beginning of the backup, sender will create a log file and write every action to that log file, title it with the current date, and at the end of the operation send it to the receiver before closing the connection

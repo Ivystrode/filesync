@@ -131,10 +131,11 @@ class Receiver():
         shutil.move(filename, destination_file)
         print("Moved")
         
-    def close_connection(self, client_socket, s):
-        print("Terminate command received")
+    def close_connection(self, client_socket, s, address):
+        print(f"[-] Terminate command received from client: {address}")
         client_socket.close()
         s.close()
+        print(f"[-] Connection to {address} closed")
         
     def receive(self):
         print("[+] Standing by to receive files...")
@@ -163,7 +164,7 @@ class Receiver():
             filesize = int(filesize)
             
             if path == "SENDCOMPLETE":
-                self.close_connection(client_socket, s)
+                self.close_connection(client_socket, s, address)
                 break
             
             else:

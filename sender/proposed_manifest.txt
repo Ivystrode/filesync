@@ -164,3 +164,501 @@ to_linux_sendthis\main\resources\commonwealth_TSA.per, Fri May  4 18:11:09 2012
 to_linux_sendthis\main\resources\diplomatic, Sat Mar 24 14:19:17 2018
 to_linux_sendthis\main\resources\diplomatic.per, Fri Apr  6 14:55:48 2018
 to_linux_sendthis\main\resources\generic_tactical.per, Sat May  5 00:22:12 2012
+to_linux_sendthis\main\ai.txt, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\AoF scenario difficulty.per, Sat Aug 15 14:49:59 2015
+to_linux_sendthis\main\AoF scenario upgrades.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Armada.ai, Thu Jun  5 13:37:28 2008
+to_linux_sendthis\main\Armada.per, Tue Oct  9 15:35:29 2018
+to_linux_sendthis\main\Blue Bolt Defender.ai, Fri Apr  6 15:22:56 2007
+to_linux_sendthis\main\Blue Bolt Defender.per, Sun Oct  7 00:15:40 2007
+to_linux_sendthis\main\Blue Bolt Navy II.ai, Sat Oct 27 12:45:00 2007
+to_linux_sendthis\main\Blue Bolt Navy II.per, Sun Oct  5 11:54:24 2008
+to_linux_sendthis\main\Blue Bolt Navy.ai, Sun Apr  1 11:34:50 2007
+to_linux_sendthis\main\Blue Bolt Navy.per, Tue Mar 27 14:51:50 2018
+to_linux_sendthis\main\builder market.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\builder resign.per, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\builder upgrades.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Byzantine Empire.ai, Thu Feb 22 19:12:40 2007
+to_linux_sendthis\main\Byzantine Empire.per, Fri Apr 13 13:04:22 2007
+to_linux_sendthis\main\CommonwealthCT1.2.ai, Thu May  3 15:27:58 2012
+to_linux_sendthis\main\CommonwealthCT1.2.per, Fri Apr  6 15:10:15 2018
+to_linux_sendthis\main\Elite First.ai, Thu Jun  5 13:37:40 2008
+to_linux_sendthis\main\Elite First.per, Mon Apr 23 16:56:58 2012
+to_linux_sendthis\main\Elite First1.1.ai, Fri Apr 27 21:23:59 2012
+to_linux_sendthis\main\Elite First1.1.per, Sun May  6 14:12:57 2012
+to_linux_sendthis\main\first.ai, Tue Feb 13 17:32:20 2007
+to_linux_sendthis\main\first.per, Fri Apr 13 08:52:56 2007
+to_linux_sendthis\main\mil scenario upgrades.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\new surprise file.txt, Thu Dec  3 22:29:43 2020
+to_linux_sendthis\main\Ottoman.ai, Sat Feb 17 19:27:16 2007
+to_linux_sendthis\main\Ottoman.per, Sun Oct  7 13:39:42 2007
+to_linux_sendthis\main\Ottoman1.1.ai, Thu Apr 26 12:59:39 2012
+to_linux_sendthis\main\Ottoman1.1.per, Fri Apr 27 21:26:25 2012
+to_linux_sendthis\main\Sassanid Empire.ai, Sat Sep  6 16:04:00 2008
+to_linux_sendthis\main\Sassanid Empire.per, Sun Apr 16 18:07:53 2017
+to_linux_sendthis\main\scenario difficulty.per, Sat Aug 15 14:49:59 2015
+to_linux_sendthis\main\scenario market.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\scenario resign.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\scenario upgrades.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Xotyl Clan.ai, Mon May  2 10:18:54 2011
+to_linux_sendthis\main\Xotyl Clan.per, Sun Apr 16 19:10:22 2017
+to_linux_sendthis\main\Byzantine Empire\Ages.per, Fri Apr 13 13:08:36 2007
+to_linux_sendthis\main\Byzantine Empire\Attacks.per, Sat Mar 31 12:38:40 2007
+to_linux_sendthis\main\Byzantine Empire\Building.per, Fri Apr 13 13:08:04 2007
+to_linux_sendthis\main\Byzantine Empire\Communication.per, Thu Apr  5 16:52:04 2007
+to_linux_sendthis\main\Byzantine Empire\Constants.per, Fri Apr 13 13:06:36 2007
+to_linux_sendthis\main\Byzantine Empire\Research.per, Fri Apr  6 12:09:58 2007
+to_linux_sendthis\main\Byzantine Empire\Strategic Numbers.per, Wed Oct 24 17:54:10 2007
+to_linux_sendthis\main\Byzantine Empire\Trading.per, Mon Apr  9 12:29:48 2007
+to_linux_sendthis\main\Byzantine Empire\Training.per, Mon Apr  9 13:10:30 2007
+to_linux_sendthis\main\Constants\Constants for AoFE.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Constants\Constants.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Constants\Economy Constants.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Constants\Military Constants.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Debug\Debug Print Timer.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Debug\Print Pop.per, Sat Aug 15 14:48:07 2015
+to_linux_sendthis\main\Debug\Print Townsize.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Dr3\personality p4 and 5.per, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\Dr3\personality p6 and 8.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Dr3\personality p7.per, Sat Aug 15 14:48:08 2015
+to_linux_sendthis\main\Dr3\shared.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Economy\Balance.per, Sat Aug 15 14:44:15 2015
+to_linux_sendthis\main\Economy\Boar Hunting.per, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\Economy\Castle Age.per, Sat Aug 15 14:49:49 2015
+to_linux_sendthis\main\Economy\Dark Age.per, Sat Aug 15 14:45:47 2015
+to_linux_sendthis\main\Economy\Economy.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Economy\Farming.per, Sat Aug 15 14:44:15 2015
+to_linux_sendthis\main\Economy\Feudal Age.per, Sat Aug 15 14:47:32 2015
+to_linux_sendthis\main\Economy\General Rules.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Economy\Imperial Age.per, Sat Aug 15 14:44:18 2015
+to_linux_sendthis\main\Economy\Low-pop Villager Distribution.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Generics\dodging.per, Sat Aug 15 14:44:18 2015
+to_linux_sendthis\main\Military\Archer Upgrades.per, Sat Aug 15 14:45:47 2015
+to_linux_sendthis\main\Military\Automatic Archer Upgrades.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Military\Automatic Cavalry Upgrades.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Military\Automatic Infantry Upgrades.per, Sat Aug 15 14:49:59 2015
+to_linux_sendthis\main\Military\Cavalry Upgrades.per, Sat Aug 15 14:45:47 2015
+to_linux_sendthis\main\Military\General Military.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Military\Infantry Upgrades.per, Sat Aug 15 14:49:50 2015
+to_linux_sendthis\main\resources\Armada_tactical.per, Mon May  7 21:03:39 2012
+to_linux_sendthis\main\resources\commonwealth_tactical.per, Sun Apr  9 16:10:35 2017
+to_linux_sendthis\main\resources\commonwealth_tactical1.1.per, Fri Mar 30 23:59:08 2018
+to_linux_sendthis\main\resources\commonwealth_TSA.per, Fri May  4 18:11:09 2012
+to_linux_sendthis\main\resources\diplomatic, Sat Mar 24 14:19:17 2018
+to_linux_sendthis\main\resources\diplomatic.per, Fri Apr  6 14:55:48 2018
+to_linux_sendthis\main\resources\generic_tactical.per, Sat May  5 00:22:12 2012
+to_linux_sendthis\main\ai.txt, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\AoF scenario difficulty.per, Sat Aug 15 14:49:59 2015
+to_linux_sendthis\main\AoF scenario upgrades.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Armada.ai, Thu Jun  5 13:37:28 2008
+to_linux_sendthis\main\Armada.per, Tue Oct  9 15:35:29 2018
+to_linux_sendthis\main\Blue Bolt Defender.ai, Fri Apr  6 15:22:56 2007
+to_linux_sendthis\main\Blue Bolt Defender.per, Sun Oct  7 00:15:40 2007
+to_linux_sendthis\main\Blue Bolt Navy II.ai, Sat Oct 27 12:45:00 2007
+to_linux_sendthis\main\Blue Bolt Navy II.per, Sun Oct  5 11:54:24 2008
+to_linux_sendthis\main\Blue Bolt Navy.ai, Sun Apr  1 11:34:50 2007
+to_linux_sendthis\main\Blue Bolt Navy.per, Tue Mar 27 14:51:50 2018
+to_linux_sendthis\main\builder market.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\builder resign.per, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\builder upgrades.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Byzantine Empire.ai, Thu Feb 22 19:12:40 2007
+to_linux_sendthis\main\Byzantine Empire.per, Fri Apr 13 13:04:22 2007
+to_linux_sendthis\main\CommonwealthCT1.2.ai, Thu May  3 15:27:58 2012
+to_linux_sendthis\main\CommonwealthCT1.2.per, Fri Apr  6 15:10:15 2018
+to_linux_sendthis\main\Elite First.ai, Thu Jun  5 13:37:40 2008
+to_linux_sendthis\main\Elite First.per, Mon Apr 23 16:56:58 2012
+to_linux_sendthis\main\Elite First1.1.ai, Fri Apr 27 21:23:59 2012
+to_linux_sendthis\main\Elite First1.1.per, Sun May  6 14:12:57 2012
+to_linux_sendthis\main\first.ai, Tue Feb 13 17:32:20 2007
+to_linux_sendthis\main\first.per, Fri Apr 13 08:52:56 2007
+to_linux_sendthis\main\mil scenario upgrades.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\new surprise file.txt, Thu Dec  3 22:29:43 2020
+to_linux_sendthis\main\Ottoman.ai, Sat Feb 17 19:27:16 2007
+to_linux_sendthis\main\Ottoman.per, Sun Oct  7 13:39:42 2007
+to_linux_sendthis\main\Ottoman1.1.ai, Thu Apr 26 12:59:39 2012
+to_linux_sendthis\main\Ottoman1.1.per, Fri Apr 27 21:26:25 2012
+to_linux_sendthis\main\Sassanid Empire.ai, Sat Sep  6 16:04:00 2008
+to_linux_sendthis\main\Sassanid Empire.per, Sun Apr 16 18:07:53 2017
+to_linux_sendthis\main\scenario difficulty.per, Sat Aug 15 14:49:59 2015
+to_linux_sendthis\main\scenario market.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\scenario resign.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\scenario upgrades.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Xotyl Clan.ai, Mon May  2 10:18:54 2011
+to_linux_sendthis\main\Xotyl Clan.per, Sun Apr 16 19:10:22 2017
+to_linux_sendthis\main\Byzantine Empire\Ages.per, Fri Apr 13 13:08:36 2007
+to_linux_sendthis\main\Byzantine Empire\Attacks.per, Sat Mar 31 12:38:40 2007
+to_linux_sendthis\main\Byzantine Empire\Building.per, Fri Apr 13 13:08:04 2007
+to_linux_sendthis\main\Byzantine Empire\Communication.per, Thu Apr  5 16:52:04 2007
+to_linux_sendthis\main\Byzantine Empire\Constants.per, Fri Apr 13 13:06:36 2007
+to_linux_sendthis\main\Byzantine Empire\Research.per, Fri Apr  6 12:09:58 2007
+to_linux_sendthis\main\Byzantine Empire\Strategic Numbers.per, Wed Oct 24 17:54:10 2007
+to_linux_sendthis\main\Byzantine Empire\Trading.per, Mon Apr  9 12:29:48 2007
+to_linux_sendthis\main\Byzantine Empire\Training.per, Mon Apr  9 13:10:30 2007
+to_linux_sendthis\main\Constants\Constants for AoFE.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Constants\Constants.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Constants\Economy Constants.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Constants\Military Constants.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Debug\Debug Print Timer.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Debug\Print Pop.per, Sat Aug 15 14:48:07 2015
+to_linux_sendthis\main\Debug\Print Townsize.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Dr3\personality p4 and 5.per, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\Dr3\personality p6 and 8.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Dr3\personality p7.per, Sat Aug 15 14:48:08 2015
+to_linux_sendthis\main\Dr3\shared.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Economy\Balance.per, Sat Aug 15 14:44:15 2015
+to_linux_sendthis\main\Economy\Boar Hunting.per, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\Economy\Castle Age.per, Sat Aug 15 14:49:49 2015
+to_linux_sendthis\main\Economy\Dark Age.per, Sat Aug 15 14:45:47 2015
+to_linux_sendthis\main\Economy\Economy.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Economy\Farming.per, Sat Aug 15 14:44:15 2015
+to_linux_sendthis\main\Economy\Feudal Age.per, Sat Aug 15 14:47:32 2015
+to_linux_sendthis\main\Economy\General Rules.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Economy\Imperial Age.per, Sat Aug 15 14:44:18 2015
+to_linux_sendthis\main\Economy\Low-pop Villager Distribution.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Generics\dodging.per, Sat Aug 15 14:44:18 2015
+to_linux_sendthis\main\Military\Archer Upgrades.per, Sat Aug 15 14:45:47 2015
+to_linux_sendthis\main\Military\Automatic Archer Upgrades.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Military\Automatic Cavalry Upgrades.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Military\Automatic Infantry Upgrades.per, Sat Aug 15 14:49:59 2015
+to_linux_sendthis\main\Military\Cavalry Upgrades.per, Sat Aug 15 14:45:47 2015
+to_linux_sendthis\main\Military\General Military.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Military\Infantry Upgrades.per, Sat Aug 15 14:49:50 2015
+to_linux_sendthis\main\resources\Armada_tactical.per, Mon May  7 21:03:39 2012
+to_linux_sendthis\main\resources\commonwealth_tactical.per, Sun Apr  9 16:10:35 2017
+to_linux_sendthis\main\resources\commonwealth_tactical1.1.per, Fri Mar 30 23:59:08 2018
+to_linux_sendthis\main\resources\commonwealth_TSA.per, Fri May  4 18:11:09 2012
+to_linux_sendthis\main\resources\diplomatic, Sat Mar 24 14:19:17 2018
+to_linux_sendthis\main\resources\diplomatic.per, Fri Apr  6 14:55:48 2018
+to_linux_sendthis\main\resources\generic_tactical.per, Sat May  5 00:22:12 2012
+to_linux_sendthis\main\ai.txt, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\AoF scenario difficulty.per, Sat Aug 15 14:49:59 2015
+to_linux_sendthis\main\AoF scenario upgrades.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Armada.ai, Thu Jun  5 13:37:28 2008
+to_linux_sendthis\main\Armada.per, Tue Oct  9 15:35:29 2018
+to_linux_sendthis\main\Blue Bolt Defender.ai, Fri Apr  6 15:22:56 2007
+to_linux_sendthis\main\Blue Bolt Defender.per, Sun Oct  7 00:15:40 2007
+to_linux_sendthis\main\Blue Bolt Navy II.ai, Sat Oct 27 12:45:00 2007
+to_linux_sendthis\main\Blue Bolt Navy II.per, Sun Oct  5 11:54:24 2008
+to_linux_sendthis\main\Blue Bolt Navy.ai, Sun Apr  1 11:34:50 2007
+to_linux_sendthis\main\Blue Bolt Navy.per, Tue Mar 27 14:51:50 2018
+to_linux_sendthis\main\builder market.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\builder resign.per, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\builder upgrades.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Byzantine Empire.ai, Thu Feb 22 19:12:40 2007
+to_linux_sendthis\main\Byzantine Empire.per, Fri Apr 13 13:04:22 2007
+to_linux_sendthis\main\CommonwealthCT1.2.ai, Thu May  3 15:27:58 2012
+to_linux_sendthis\main\CommonwealthCT1.2.per, Fri Apr  6 15:10:15 2018
+to_linux_sendthis\main\Elite First.ai, Thu Jun  5 13:37:40 2008
+to_linux_sendthis\main\Elite First.per, Mon Apr 23 16:56:58 2012
+to_linux_sendthis\main\Elite First1.1.ai, Fri Apr 27 21:23:59 2012
+to_linux_sendthis\main\Elite First1.1.per, Sun May  6 14:12:57 2012
+to_linux_sendthis\main\first.ai, Tue Feb 13 17:32:20 2007
+to_linux_sendthis\main\first.per, Fri Apr 13 08:52:56 2007
+to_linux_sendthis\main\mil scenario upgrades.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\new surprise file.txt, Thu Dec  3 22:29:43 2020
+to_linux_sendthis\main\Ottoman.ai, Sat Feb 17 19:27:16 2007
+to_linux_sendthis\main\Ottoman.per, Sun Oct  7 13:39:42 2007
+to_linux_sendthis\main\Ottoman1.1.ai, Thu Apr 26 12:59:39 2012
+to_linux_sendthis\main\Ottoman1.1.per, Fri Apr 27 21:26:25 2012
+to_linux_sendthis\main\Sassanid Empire.ai, Sat Sep  6 16:04:00 2008
+to_linux_sendthis\main\Sassanid Empire.per, Sun Apr 16 18:07:53 2017
+to_linux_sendthis\main\scenario difficulty.per, Sat Aug 15 14:49:59 2015
+to_linux_sendthis\main\scenario market.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\scenario resign.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\scenario upgrades.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Xotyl Clan.ai, Mon May  2 10:18:54 2011
+to_linux_sendthis\main\Xotyl Clan.per, Sun Apr 16 19:10:22 2017
+to_linux_sendthis\main\Byzantine Empire\Ages.per, Fri Apr 13 13:08:36 2007
+to_linux_sendthis\main\Byzantine Empire\Attacks.per, Sat Mar 31 12:38:40 2007
+to_linux_sendthis\main\Byzantine Empire\Building.per, Fri Apr 13 13:08:04 2007
+to_linux_sendthis\main\Byzantine Empire\Communication.per, Thu Apr  5 16:52:04 2007
+to_linux_sendthis\main\Byzantine Empire\Constants.per, Fri Apr 13 13:06:36 2007
+to_linux_sendthis\main\Byzantine Empire\Research.per, Fri Apr  6 12:09:58 2007
+to_linux_sendthis\main\Byzantine Empire\Strategic Numbers.per, Wed Oct 24 17:54:10 2007
+to_linux_sendthis\main\Byzantine Empire\Trading.per, Mon Apr  9 12:29:48 2007
+to_linux_sendthis\main\Byzantine Empire\Training.per, Mon Apr  9 13:10:30 2007
+to_linux_sendthis\main\Constants\Constants for AoFE.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Constants\Constants.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Constants\Economy Constants.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Constants\Military Constants.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Debug\Debug Print Timer.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Debug\Print Pop.per, Sat Aug 15 14:48:07 2015
+to_linux_sendthis\main\Debug\Print Townsize.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Dr3\personality p4 and 5.per, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\Dr3\personality p6 and 8.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Dr3\personality p7.per, Sat Aug 15 14:48:08 2015
+to_linux_sendthis\main\Dr3\shared.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Economy\Balance.per, Sat Aug 15 14:44:15 2015
+to_linux_sendthis\main\Economy\Boar Hunting.per, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\Economy\Castle Age.per, Sat Aug 15 14:49:49 2015
+to_linux_sendthis\main\Economy\Dark Age.per, Sat Aug 15 14:45:47 2015
+to_linux_sendthis\main\Economy\Economy.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Economy\Farming.per, Sat Aug 15 14:44:15 2015
+to_linux_sendthis\main\Economy\Feudal Age.per, Sat Aug 15 14:47:32 2015
+to_linux_sendthis\main\Economy\General Rules.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Economy\Imperial Age.per, Sat Aug 15 14:44:18 2015
+to_linux_sendthis\main\Economy\Low-pop Villager Distribution.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Generics\dodging.per, Sat Aug 15 14:44:18 2015
+to_linux_sendthis\main\Military\Archer Upgrades.per, Sat Aug 15 14:45:47 2015
+to_linux_sendthis\main\Military\Automatic Archer Upgrades.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Military\Automatic Cavalry Upgrades.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Military\Automatic Infantry Upgrades.per, Sat Aug 15 14:49:59 2015
+to_linux_sendthis\main\Military\Cavalry Upgrades.per, Sat Aug 15 14:45:47 2015
+to_linux_sendthis\main\Military\General Military.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Military\Infantry Upgrades.per, Sat Aug 15 14:49:50 2015
+to_linux_sendthis\main\resources\Armada_tactical.per, Mon May  7 21:03:39 2012
+to_linux_sendthis\main\resources\commonwealth_tactical.per, Sun Apr  9 16:10:35 2017
+to_linux_sendthis\main\resources\commonwealth_tactical1.1.per, Fri Mar 30 23:59:08 2018
+to_linux_sendthis\main\resources\commonwealth_TSA.per, Fri May  4 18:11:09 2012
+to_linux_sendthis\main\resources\diplomatic, Sat Mar 24 14:19:17 2018
+to_linux_sendthis\main\resources\diplomatic.per, Fri Apr  6 14:55:48 2018
+to_linux_sendthis\main\resources\generic_tactical.per, Sat May  5 00:22:12 2012
+to_linux_sendthis\main\ai.txt, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\AoF scenario difficulty.per, Sat Aug 15 14:49:59 2015
+to_linux_sendthis\main\AoF scenario upgrades.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Armada.ai, Thu Jun  5 13:37:28 2008
+to_linux_sendthis\main\Armada.per, Tue Oct  9 15:35:29 2018
+to_linux_sendthis\main\Blue Bolt Defender.ai, Fri Apr  6 15:22:56 2007
+to_linux_sendthis\main\Blue Bolt Defender.per, Sun Oct  7 00:15:40 2007
+to_linux_sendthis\main\Blue Bolt Navy II.ai, Sat Oct 27 12:45:00 2007
+to_linux_sendthis\main\Blue Bolt Navy II.per, Sun Oct  5 11:54:24 2008
+to_linux_sendthis\main\Blue Bolt Navy.ai, Sun Apr  1 11:34:50 2007
+to_linux_sendthis\main\Blue Bolt Navy.per, Tue Mar 27 14:51:50 2018
+to_linux_sendthis\main\builder market.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\builder resign.per, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\builder upgrades.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Byzantine Empire.ai, Thu Feb 22 19:12:40 2007
+to_linux_sendthis\main\Byzantine Empire.per, Fri Apr 13 13:04:22 2007
+to_linux_sendthis\main\CommonwealthCT1.2.ai, Thu May  3 15:27:58 2012
+to_linux_sendthis\main\CommonwealthCT1.2.per, Fri Apr  6 15:10:15 2018
+to_linux_sendthis\main\Elite First.ai, Thu Jun  5 13:37:40 2008
+to_linux_sendthis\main\Elite First.per, Mon Apr 23 16:56:58 2012
+to_linux_sendthis\main\Elite First1.1.ai, Fri Apr 27 21:23:59 2012
+to_linux_sendthis\main\Elite First1.1.per, Sun May  6 14:12:57 2012
+to_linux_sendthis\main\first.ai, Tue Feb 13 17:32:20 2007
+to_linux_sendthis\main\first.per, Fri Apr 13 08:52:56 2007
+to_linux_sendthis\main\mil scenario upgrades.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\new surprise file.txt, Thu Dec  3 22:29:43 2020
+to_linux_sendthis\main\Ottoman.ai, Sat Feb 17 19:27:16 2007
+to_linux_sendthis\main\Ottoman.per, Sun Oct  7 13:39:42 2007
+to_linux_sendthis\main\Ottoman1.1.ai, Thu Apr 26 12:59:39 2012
+to_linux_sendthis\main\Ottoman1.1.per, Fri Apr 27 21:26:25 2012
+to_linux_sendthis\main\Sassanid Empire.ai, Sat Sep  6 16:04:00 2008
+to_linux_sendthis\main\Sassanid Empire.per, Sun Apr 16 18:07:53 2017
+to_linux_sendthis\main\scenario difficulty.per, Sat Aug 15 14:49:59 2015
+to_linux_sendthis\main\scenario market.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\scenario resign.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\scenario upgrades.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Xotyl Clan.ai, Mon May  2 10:18:54 2011
+to_linux_sendthis\main\Xotyl Clan.per, Sun Apr 16 19:10:22 2017
+to_linux_sendthis\main\Byzantine Empire\Ages.per, Fri Apr 13 13:08:36 2007
+to_linux_sendthis\main\Byzantine Empire\Attacks.per, Sat Mar 31 12:38:40 2007
+to_linux_sendthis\main\Byzantine Empire\Building.per, Fri Apr 13 13:08:04 2007
+to_linux_sendthis\main\Byzantine Empire\Communication.per, Thu Apr  5 16:52:04 2007
+to_linux_sendthis\main\Byzantine Empire\Constants.per, Fri Apr 13 13:06:36 2007
+to_linux_sendthis\main\Byzantine Empire\Research.per, Fri Apr  6 12:09:58 2007
+to_linux_sendthis\main\Byzantine Empire\Strategic Numbers.per, Wed Oct 24 17:54:10 2007
+to_linux_sendthis\main\Byzantine Empire\Trading.per, Mon Apr  9 12:29:48 2007
+to_linux_sendthis\main\Byzantine Empire\Training.per, Mon Apr  9 13:10:30 2007
+to_linux_sendthis\main\Constants\Constants for AoFE.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Constants\Constants.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Constants\Economy Constants.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Constants\Military Constants.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Debug\Debug Print Timer.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Debug\Print Pop.per, Sat Aug 15 14:48:07 2015
+to_linux_sendthis\main\Debug\Print Townsize.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Dr3\personality p4 and 5.per, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\Dr3\personality p6 and 8.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Dr3\personality p7.per, Sat Aug 15 14:48:08 2015
+to_linux_sendthis\main\Dr3\shared.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Economy\Balance.per, Sat Aug 15 14:44:15 2015
+to_linux_sendthis\main\Economy\Boar Hunting.per, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\Economy\Castle Age.per, Sat Aug 15 14:49:49 2015
+to_linux_sendthis\main\Economy\Dark Age.per, Sat Aug 15 14:45:47 2015
+to_linux_sendthis\main\Economy\Economy.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Economy\Farming.per, Sat Aug 15 14:44:15 2015
+to_linux_sendthis\main\Economy\Feudal Age.per, Sat Aug 15 14:47:32 2015
+to_linux_sendthis\main\Economy\General Rules.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Economy\Imperial Age.per, Sat Aug 15 14:44:18 2015
+to_linux_sendthis\main\Economy\Low-pop Villager Distribution.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Generics\dodging.per, Sat Aug 15 14:44:18 2015
+to_linux_sendthis\main\Military\Archer Upgrades.per, Sat Aug 15 14:45:47 2015
+to_linux_sendthis\main\Military\Automatic Archer Upgrades.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Military\Automatic Cavalry Upgrades.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Military\Automatic Infantry Upgrades.per, Sat Aug 15 14:49:59 2015
+to_linux_sendthis\main\Military\Cavalry Upgrades.per, Sat Aug 15 14:45:47 2015
+to_linux_sendthis\main\Military\General Military.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Military\Infantry Upgrades.per, Sat Aug 15 14:49:50 2015
+to_linux_sendthis\main\resources\Armada_tactical.per, Mon May  7 21:03:39 2012
+to_linux_sendthis\main\resources\commonwealth_tactical.per, Sun Apr  9 16:10:35 2017
+to_linux_sendthis\main\resources\commonwealth_tactical1.1.per, Fri Mar 30 23:59:08 2018
+to_linux_sendthis\main\resources\commonwealth_TSA.per, Fri May  4 18:11:09 2012
+to_linux_sendthis\main\resources\diplomatic, Sat Mar 24 14:19:17 2018
+to_linux_sendthis\main\resources\diplomatic.per, Fri Apr  6 14:55:48 2018
+to_linux_sendthis\main\resources\generic_tactical.per, Sat May  5 00:22:12 2012
+to_linux_sendthis\main\ai.txt, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\AoF scenario difficulty.per, Sat Aug 15 14:49:59 2015
+to_linux_sendthis\main\AoF scenario upgrades.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Armada.ai, Thu Jun  5 13:37:28 2008
+to_linux_sendthis\main\Armada.per, Tue Oct  9 15:35:29 2018
+to_linux_sendthis\main\Blue Bolt Defender.ai, Fri Apr  6 15:22:56 2007
+to_linux_sendthis\main\Blue Bolt Defender.per, Sun Oct  7 00:15:40 2007
+to_linux_sendthis\main\Blue Bolt Navy II.ai, Sat Oct 27 12:45:00 2007
+to_linux_sendthis\main\Blue Bolt Navy II.per, Sun Oct  5 11:54:24 2008
+to_linux_sendthis\main\Blue Bolt Navy.ai, Sun Apr  1 11:34:50 2007
+to_linux_sendthis\main\Blue Bolt Navy.per, Tue Mar 27 14:51:50 2018
+to_linux_sendthis\main\builder market.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\builder resign.per, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\builder upgrades.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Byzantine Empire.ai, Thu Feb 22 19:12:40 2007
+to_linux_sendthis\main\Byzantine Empire.per, Fri Apr 13 13:04:22 2007
+to_linux_sendthis\main\CommonwealthCT1.2.ai, Thu May  3 15:27:58 2012
+to_linux_sendthis\main\CommonwealthCT1.2.per, Fri Apr  6 15:10:15 2018
+to_linux_sendthis\main\Elite First.ai, Thu Jun  5 13:37:40 2008
+to_linux_sendthis\main\Elite First.per, Mon Apr 23 16:56:58 2012
+to_linux_sendthis\main\Elite First1.1.ai, Fri Apr 27 21:23:59 2012
+to_linux_sendthis\main\Elite First1.1.per, Sun May  6 14:12:57 2012
+to_linux_sendthis\main\first.ai, Tue Feb 13 17:32:20 2007
+to_linux_sendthis\main\first.per, Fri Apr 13 08:52:56 2007
+to_linux_sendthis\main\mil scenario upgrades.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\new surprise file.txt, Thu Dec  3 22:29:43 2020
+to_linux_sendthis\main\Ottoman.ai, Sat Feb 17 19:27:16 2007
+to_linux_sendthis\main\Ottoman.per, Sun Oct  7 13:39:42 2007
+to_linux_sendthis\main\Ottoman1.1.ai, Thu Apr 26 12:59:39 2012
+to_linux_sendthis\main\Ottoman1.1.per, Fri Apr 27 21:26:25 2012
+to_linux_sendthis\main\Sassanid Empire.ai, Sat Sep  6 16:04:00 2008
+to_linux_sendthis\main\Sassanid Empire.per, Sun Apr 16 18:07:53 2017
+to_linux_sendthis\main\scenario difficulty.per, Sat Aug 15 14:49:59 2015
+to_linux_sendthis\main\scenario market.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\scenario resign.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\scenario upgrades.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Xotyl Clan.ai, Mon May  2 10:18:54 2011
+to_linux_sendthis\main\Xotyl Clan.per, Sun Apr 16 19:10:22 2017
+to_linux_sendthis\main\Byzantine Empire\Ages.per, Fri Apr 13 13:08:36 2007
+to_linux_sendthis\main\Byzantine Empire\Attacks.per, Sat Mar 31 12:38:40 2007
+to_linux_sendthis\main\Byzantine Empire\Building.per, Fri Apr 13 13:08:04 2007
+to_linux_sendthis\main\Byzantine Empire\Communication.per, Thu Apr  5 16:52:04 2007
+to_linux_sendthis\main\Byzantine Empire\Constants.per, Fri Apr 13 13:06:36 2007
+to_linux_sendthis\main\Byzantine Empire\Research.per, Fri Apr  6 12:09:58 2007
+to_linux_sendthis\main\Byzantine Empire\Strategic Numbers.per, Wed Oct 24 17:54:10 2007
+to_linux_sendthis\main\Byzantine Empire\Trading.per, Mon Apr  9 12:29:48 2007
+to_linux_sendthis\main\Byzantine Empire\Training.per, Mon Apr  9 13:10:30 2007
+to_linux_sendthis\main\Constants\Constants for AoFE.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Constants\Constants.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Constants\Economy Constants.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Constants\Military Constants.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Debug\Debug Print Timer.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Debug\Print Pop.per, Sat Aug 15 14:48:07 2015
+to_linux_sendthis\main\Debug\Print Townsize.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Dr3\personality p4 and 5.per, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\Dr3\personality p6 and 8.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Dr3\personality p7.per, Sat Aug 15 14:48:08 2015
+to_linux_sendthis\main\Dr3\shared.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Economy\Balance.per, Sat Aug 15 14:44:15 2015
+to_linux_sendthis\main\Economy\Boar Hunting.per, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\Economy\Castle Age.per, Sat Aug 15 14:49:49 2015
+to_linux_sendthis\main\Economy\Dark Age.per, Sat Aug 15 14:45:47 2015
+to_linux_sendthis\main\Economy\Economy.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Economy\Farming.per, Sat Aug 15 14:44:15 2015
+to_linux_sendthis\main\Economy\Feudal Age.per, Sat Aug 15 14:47:32 2015
+to_linux_sendthis\main\Economy\General Rules.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Economy\Imperial Age.per, Sat Aug 15 14:44:18 2015
+to_linux_sendthis\main\Economy\Low-pop Villager Distribution.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Generics\dodging.per, Sat Aug 15 14:44:18 2015
+to_linux_sendthis\main\Military\Archer Upgrades.per, Sat Aug 15 14:45:47 2015
+to_linux_sendthis\main\Military\Automatic Archer Upgrades.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Military\Automatic Cavalry Upgrades.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Military\Automatic Infantry Upgrades.per, Sat Aug 15 14:49:59 2015
+to_linux_sendthis\main\Military\Cavalry Upgrades.per, Sat Aug 15 14:45:47 2015
+to_linux_sendthis\main\Military\General Military.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Military\Infantry Upgrades.per, Sat Aug 15 14:49:50 2015
+to_linux_sendthis\main\resources\Armada_tactical.per, Mon May  7 21:03:39 2012
+to_linux_sendthis\main\resources\commonwealth_tactical.per, Sun Apr  9 16:10:35 2017
+to_linux_sendthis\main\resources\commonwealth_tactical1.1.per, Fri Mar 30 23:59:08 2018
+to_linux_sendthis\main\resources\commonwealth_TSA.per, Fri May  4 18:11:09 2012
+to_linux_sendthis\main\resources\diplomatic, Sat Mar 24 14:19:17 2018
+to_linux_sendthis\main\resources\diplomatic.per, Fri Apr  6 14:55:48 2018
+to_linux_sendthis\main\resources\generic_tactical.per, Sat May  5 00:22:12 2012
+to_linux_sendthis\main\ai.txt, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\AoF scenario difficulty.per, Sat Aug 15 14:49:59 2015
+to_linux_sendthis\main\AoF scenario upgrades.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Armada.ai, Thu Jun  5 13:37:28 2008
+to_linux_sendthis\main\Armada.per, Tue Oct  9 15:35:29 2018
+to_linux_sendthis\main\Blue Bolt Defender.ai, Fri Apr  6 15:22:56 2007
+to_linux_sendthis\main\Blue Bolt Defender.per, Sun Oct  7 00:15:40 2007
+to_linux_sendthis\main\Blue Bolt Navy II.ai, Sat Oct 27 12:45:00 2007
+to_linux_sendthis\main\Blue Bolt Navy II.per, Sun Oct  5 11:54:24 2008
+to_linux_sendthis\main\Blue Bolt Navy.ai, Sun Apr  1 11:34:50 2007
+to_linux_sendthis\main\Blue Bolt Navy.per, Tue Mar 27 14:51:50 2018
+to_linux_sendthis\main\builder market.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\builder resign.per, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\builder upgrades.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Byzantine Empire.ai, Thu Feb 22 19:12:40 2007
+to_linux_sendthis\main\Byzantine Empire.per, Fri Apr 13 13:04:22 2007
+to_linux_sendthis\main\CommonwealthCT1.2.ai, Thu May  3 15:27:58 2012
+to_linux_sendthis\main\CommonwealthCT1.2.per, Fri Apr  6 15:10:15 2018
+to_linux_sendthis\main\Elite First.ai, Thu Jun  5 13:37:40 2008
+to_linux_sendthis\main\Elite First.per, Mon Apr 23 16:56:58 2012
+to_linux_sendthis\main\Elite First1.1.ai, Fri Apr 27 21:23:59 2012
+to_linux_sendthis\main\Elite First1.1.per, Sun May  6 14:12:57 2012
+to_linux_sendthis\main\first.ai, Tue Feb 13 17:32:20 2007
+to_linux_sendthis\main\first.per, Fri Apr 13 08:52:56 2007
+to_linux_sendthis\main\mil scenario upgrades.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\new surprise file.txt, Thu Dec  3 22:29:43 2020
+to_linux_sendthis\main\Ottoman.ai, Sat Feb 17 19:27:16 2007
+to_linux_sendthis\main\Ottoman.per, Sun Oct  7 13:39:42 2007
+to_linux_sendthis\main\Ottoman1.1.ai, Thu Apr 26 12:59:39 2012
+to_linux_sendthis\main\Ottoman1.1.per, Fri Apr 27 21:26:25 2012
+to_linux_sendthis\main\Sassanid Empire.ai, Sat Sep  6 16:04:00 2008
+to_linux_sendthis\main\Sassanid Empire.per, Sun Apr 16 18:07:53 2017
+to_linux_sendthis\main\scenario difficulty.per, Sat Aug 15 14:49:59 2015
+to_linux_sendthis\main\scenario market.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\scenario resign.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\scenario upgrades.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Xotyl Clan.ai, Mon May  2 10:18:54 2011
+to_linux_sendthis\main\Xotyl Clan.per, Sun Apr 16 19:10:22 2017
+to_linux_sendthis\main\Byzantine Empire\Ages.per, Fri Apr 13 13:08:36 2007
+to_linux_sendthis\main\Byzantine Empire\Attacks.per, Sat Mar 31 12:38:40 2007
+to_linux_sendthis\main\Byzantine Empire\Building.per, Fri Apr 13 13:08:04 2007
+to_linux_sendthis\main\Byzantine Empire\Communication.per, Thu Apr  5 16:52:04 2007
+to_linux_sendthis\main\Byzantine Empire\Constants.per, Fri Apr 13 13:06:36 2007
+to_linux_sendthis\main\Byzantine Empire\Research.per, Fri Apr  6 12:09:58 2007
+to_linux_sendthis\main\Byzantine Empire\Strategic Numbers.per, Wed Oct 24 17:54:10 2007
+to_linux_sendthis\main\Byzantine Empire\Trading.per, Mon Apr  9 12:29:48 2007
+to_linux_sendthis\main\Byzantine Empire\Training.per, Mon Apr  9 13:10:30 2007
+to_linux_sendthis\main\Constants\Constants for AoFE.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Constants\Constants.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Constants\Economy Constants.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Constants\Military Constants.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Debug\Debug Print Timer.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Debug\Print Pop.per, Sat Aug 15 14:48:07 2015
+to_linux_sendthis\main\Debug\Print Townsize.per, Sat Aug 15 14:44:14 2015
+to_linux_sendthis\main\Dr3\personality p4 and 5.per, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\Dr3\personality p6 and 8.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Dr3\personality p7.per, Sat Aug 15 14:48:08 2015
+to_linux_sendthis\main\Dr3\shared.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Economy\Balance.per, Sat Aug 15 14:44:15 2015
+to_linux_sendthis\main\Economy\Boar Hunting.per, Sat Aug 15 14:45:46 2015
+to_linux_sendthis\main\Economy\Castle Age.per, Sat Aug 15 14:49:49 2015
+to_linux_sendthis\main\Economy\Dark Age.per, Sat Aug 15 14:45:47 2015
+to_linux_sendthis\main\Economy\Economy.per, Sat Aug 15 14:48:03 2015
+to_linux_sendthis\main\Economy\Farming.per, Sat Aug 15 14:44:15 2015
+to_linux_sendthis\main\Economy\Feudal Age.per, Sat Aug 15 14:47:32 2015
+to_linux_sendthis\main\Economy\General Rules.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Economy\Imperial Age.per, Sat Aug 15 14:44:18 2015
+to_linux_sendthis\main\Economy\Low-pop Villager Distribution.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Generics\dodging.per, Sat Aug 15 14:44:18 2015
+to_linux_sendthis\main\Military\Archer Upgrades.per, Sat Aug 15 14:45:47 2015
+to_linux_sendthis\main\Military\Automatic Archer Upgrades.per, Sat Aug 15 14:44:57 2015
+to_linux_sendthis\main\Military\Automatic Cavalry Upgrades.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Military\Automatic Infantry Upgrades.per, Sat Aug 15 14:49:59 2015
+to_linux_sendthis\main\Military\Cavalry Upgrades.per, Sat Aug 15 14:45:47 2015
+to_linux_sendthis\main\Military\General Military.per, Sat Aug 15 14:47:45 2015
+to_linux_sendthis\main\Military\Infantry Upgrades.per, Sat Aug 15 14:49:50 2015
+to_linux_sendthis\main\resources\Armada_tactical.per, Mon May  7 21:03:39 2012
+to_linux_sendthis\main\resources\commonwealth_tactical.per, Sun Apr  9 16:10:35 2017
+to_linux_sendthis\main\resources\commonwealth_tactical1.1.per, Fri Mar 30 23:59:08 2018
+to_linux_sendthis\main\resources\commonwealth_TSA.per, Fri May  4 18:11:09 2012
+to_linux_sendthis\main\resources\diplomatic, Sat Mar 24 14:19:17 2018
+to_linux_sendthis\main\resources\diplomatic.per, Fri Apr  6 14:55:48 2018
+to_linux_sendthis\main\resources\generic_tactical.per, Sat May  5 00:22:12 2012

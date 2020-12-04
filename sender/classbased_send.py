@@ -36,7 +36,7 @@ class Transmitter():
         else:
             self.backup_day = self.weekdays
             print("\n[!] Backups will occur daily\n")
-            print(self.backup_day)
+            # print(self.backup_day)
                 
         if backup_timerange[0] >= backup_timerange[1]:
             print("\n[!] Invalid Time Range\n")
@@ -88,6 +88,8 @@ class Transmitter():
                                 except Exception as err:
                                     print("[!] BACKUP ERROR:")
                                     print(err)
+                                    #recursively call self.run_scheduler again so the backup process can restart?
+                                    #maybe for some errors - check what the exception/err is and decide based on that
                             else:
                                 print("Waiting for backup window...")
                                     
@@ -130,8 +132,13 @@ class Transmitter():
         print("[*] Sending proposed manifest to server...")
         self.sendfile("proposed_manifest.txt")
         print("[+] Proposed manifest sent")
-        server_manifest = self.check_server_manifest()
-        return server_manifest
+        
+        # method 1...
+        # server_manifest = self.check_server_manifest()
+        # return server_manifest
+        
+        # method 2...less code same thing
+        return self.check_server_manifest() # i think this does 
                         
     def check_server_manifest(self):
         """
@@ -255,11 +262,19 @@ class Transmitter():
     
 
 if __name__ == '__main__':
-    backup = Transmitter("192.168.0.16", 
+    
+    rpi_backup = Transmitter("192.168.0.16", 
                          5001, 
-                         ['thursday', 'sunday'], 
-                         ("2109", "2359"), 
+                         ['friday', 'sunday'], 
+                         ("1136", "2359"), 
                          "to_linux_sendthis")
-    backup.run_scheduler()
+    
+    local_test = Transmitter("10.248.220.31", # does this not work because its on the same computer? try with the laptop
+                         5001, 
+                         ['daily'], 
+                         ("1116", "1700"), 
+                         "sendthis")
+    
+    rpi_backup.run_scheduler()
 
         
