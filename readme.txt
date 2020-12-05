@@ -11,6 +11,7 @@ sendthis directories gitignored
 use sendthis folders to send files, dont include test files in git commits
 
 To do
+- Add scheduler function to receiver
 - Add ability to send files if modified date is changed
 - Consider dating each proposed manifest so receiver can check it (and vice versa)
 - The manifests could then be stored in a log folder...
