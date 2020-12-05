@@ -5,6 +5,7 @@ Program to backup files to offsite locations
 CURRENT BEST WORKING STATE:
 Transmitter class takes host, port, list of days to back up and time range in a tuple and then runs scheduled backups
 Client and server now send manifests to decide which files to send.
+All actions are logged to a dated logfile and stored in a log directory
 
 sendthis directories gitignored
 use sendthis folders to send files, dont include test files in git commits
@@ -20,6 +21,3 @@ To do
     - Second warning message will be sent if script seems to be successful in deleting it
     - Separate thread can detect an emergency shutdown message from telegram
 - Add file encryption/decryption?
-
-- log file
-backup/sync will happen at regular intervals. at the beginning of the backup, sender will create a log file and write every action to that log file, title it with the current date, and at the end of the operation send it to the receiver before closing the connection

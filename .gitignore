@@ -4,3 +4,5 @@ dl_manager.py
 proposed_manifest.txt
 server_manifest.txt
 *File_Root/
+Transmit_logs/
+Receive_logs/
