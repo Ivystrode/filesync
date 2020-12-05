@@ -88,15 +88,14 @@ class Receiver():
         with open(server_manifest_file, "w") as s: # I think I should remove this so that the below works...
             s.write("")
  
-        # for some reason this writes each file to the manifest several times
-        # or at least the sender sends the file several times
-        # why does it do this?
+        # Investigate why this only adds 363 of the 965 files in the backup dir...
+        # Maybe its a RAM issue. Should I change this to a filename.find("text") function?
         with open(proposed_manifest, "r") as pfile:
             for line in pfile.readlines():
                 file = tuple(line.split(", "))
                 file_name = file[0].replace("\\", "/")
                 proposed_manifest_filecount += 1
-                if os.path.exists(file_name):
+                if os.path.exists(file_name): # try changing to isfile to fix above?
                     print(f"{file_name} is present")
                     pass
                 else:

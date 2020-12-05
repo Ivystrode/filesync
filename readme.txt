@@ -10,6 +10,11 @@ All actions are logged to a dated logfile and stored in a log directory
 sendthis directories gitignored
 use sendthis folders to send files, dont include test files in git commits
 
+ISSUE:
+For some reason server manifest stops appending at: File_Root\Iain Banks book collection\The Business\metadata.opf, Fri Aug 10 15:20:20 2012
+This is 363 files of 965 in the proposed manifest/folder structure
+Why does it do this
+
 To do
 - Add scheduler function to receiver
 - Add ability to send files if modified date is changed
