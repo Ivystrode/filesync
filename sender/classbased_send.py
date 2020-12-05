@@ -13,8 +13,12 @@ class Transmitter():
         self.backup_day = backup_day
         self.backup_timerange = backup_timerange
         self.backup_dir = backup_dir
+        
         self.SEPARATOR = "<SEPARATOR>"
         self.BUFFER_SIZE = 4096
+        
+        self.files_sent = 0
+        self.files_unknown = 0
         
         self.weekdays = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday']
         
@@ -37,6 +41,7 @@ class Transmitter():
             self.backup_day = self.weekdays
             print("\n[!] Backups will occur daily\n")
             # print(self.backup_day)
+        print(self.backup_day)
                 
         if backup_timerange[0] >= backup_timerange[1]:
             print("\n[!] Invalid Time Range\n")
@@ -121,6 +126,11 @@ class Transmitter():
         to determine which files to send
         """
         
+        if os.path.exists("proposed_manifest.txt"):
+            with open("proposed_manifest.txt", "w") as f:
+                f.write("")
+                print("previous manifest deleted")
+        
         print("[*] Writing manifest")
         for item in os.walk(self.backup_dir):
             if len(item[2]) > 0:
@@ -140,7 +150,7 @@ class Transmitter():
         # return server_manifest
         
         # method 2...less code same thing
-        return self.check_server_manifest() # i think this does 
+        return self.check_server_manifest() 
                         
     def check_server_manifest(self):
         """
@@ -228,7 +238,7 @@ class Transmitter():
                     print("[!] Server is already up to date, terminating backup operations")
                     break
                 if os.path.exists(file):
-                    print("yes it exists")
+                    print(f"Located: {file}")
                     try:
                         print(file)
                         self.sendfile(file)
@@ -244,8 +254,10 @@ class Transmitter():
                             except:
                                 print("\n[!] FILE NOT SENT\n")
                                 pass
+                    self.files_sent += 1
                 else:
-                    print("Cant find it...")
+                    print(f"Unable to locate: {file}")
+                    self.files_unknown += 1
                 time.sleep(0.1)
                             
             self.terminate()
@@ -256,6 +268,8 @@ class Transmitter():
         """
         
         print("[*] File transmit complete, informing receiver")
+        print(f"[*] {self.files_sent} files sent")
+        print(f"[*] {self.files_unknown} requested files not located")
         time.sleep(1)
         self.sendfile('SENDCOMPLETE')
         
@@ -265,17 +279,17 @@ class Transmitter():
 
 if __name__ == '__main__':
     
-    rpi_backup = Transmitter("192.168.0.16", 
-                         5001, 
-                         ['friday', 'sunday'], 
-                         ("1136", "2359"), 
-                         "to_linux_sendthis")
-    
-    local_test = Transmitter("10.248.220.31", # does this not work because its on the same computer? try with the laptop
+    rpi_backup = Transmitter("192.168.0.217", 
                          5001, 
                          ['daily'], 
-                         ("1116", "1700"), 
-                         "sendthis")
+                         ("0001", "2359"), 
+                         "File_Root")
+    
+    # local_test = Transmitter("10.248.220.31", # does this not work because its on the same computer? try with the laptop
+    #                      5001, 
+    #                      ['daily'], 
+    #                      ("1116", "1700"), 
+    #                      "sendthis")
     
     rpi_backup.run_scheduler()
 

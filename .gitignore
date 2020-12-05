@@ -2,4 +2,5 @@ dl_manager.py
 *sendthis/
 *.tar.gz
 proposed_manifest.txt
-/**server_manifest.txt
+server_manifest.txt
+*File_Root/

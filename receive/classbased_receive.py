@@ -18,6 +18,9 @@ class Receiver():
         
         self.sendback_address = ""
         self.sendback_port = 5002
+        
+        self.files_requested = 0
+        self.files_received = 0
 
         self.backup_dir = backup_dir + "\\"
         print(f"BACKUP DIR IS {self.backup_dir}")
@@ -84,6 +87,7 @@ class Receiver():
                     pass
                 else:
                     print(f"Adding: {file_name} to server manifest")
+                    self.files_requested += 1
                     with open(server_manifest_file, "a") as sfile:
                         sfile.write(file_name + "\n")
                         time.sleep(0.1)
@@ -107,6 +111,7 @@ class Receiver():
         
         filesize = os.path.getsize(server_manifest)
         s.send(f"{server_manifest}{self.SEPARATOR}{filesize}".encode())
+        time.sleep(1)
         
         progress = tqdm(range(filesize), f"\n[*] Sending {server_manifest}", unit="B", unit_scale=True, unit_divisor=1024)
 
@@ -134,6 +139,7 @@ class Receiver():
             os.makedirs(destination_folder)
             print("folder made")
         shutil.move(filename, destination_file)
+        self.files_received += 1
         print("Moved")
         
     def close_connection(self, client_socket, s, address):
@@ -141,6 +147,10 @@ class Receiver():
         client_socket.close()
         s.close()
         print(f"[-] Connection to {address} closed")
+        print(f"[-] {self.files_requested} files requested")
+        print(f"[-] {self.files_received} files received")
+        if self.files_received != self.files_requested:
+            print("[!] Some requested files were not received. Check the server manifest.")
         
     def receive(self):
         print("[+] Standing by to receive files...")
