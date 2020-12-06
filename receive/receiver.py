@@ -83,13 +83,11 @@ class Receiver():
  
         client_manifest_filecount = 0
  
-        server_manifest_file = "server_manifest.txt" # eventually give this a dated name
+        server_manifest_file = "server_manifest.txt" 
  
         with open(server_manifest_file, "w") as s: # I think I should remove this so that the below works...
             s.write("")
  
-        # Investigate why this only adds 363 of the 965 files in the backup dir...
-        # Maybe its a RAM issue. Should I change this to a filename.find("text") function?
         with open(client_manifest, "r") as pfile:
             for line in pfile.readlines():
                 file = tuple(line.split(", "))
