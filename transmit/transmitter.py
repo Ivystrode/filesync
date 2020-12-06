@@ -149,8 +149,8 @@ class Transmitter():
         """
         filecount = 0
         
-        if os.path.exists("proposed_manifest.txt"):
-            with open("proposed_manifest.txt", "w") as f:
+        if os.path.exists("client_manifest.txt"):
+            with open("client_manifest.txt", "w") as f:
                 f.write("")
                 print("previous manifest deleted")
         
@@ -162,15 +162,15 @@ class Transmitter():
                     file_modded_date =  time.ctime(os.path.getmtime(item[0] + "\\" + file))
                     # file_modded_date =  os.path.getmtime(item[0] + "\\" + file)
                     filecount += 1
-                    with open("proposed_manifest.txt", "a") as f:
+                    with open("client_manifest.txt", "a") as f:
                         f.write(f"{file_namepath}, {file_modded_date}\n")
                         
         with open(self.logfile, "a") as f:
-                f.write(f"\n[*] Files sent in proposed manifest: {str(filecount)}\n")
+                f.write(f"\n[*] Files sent in client manifest: {str(filecount)}\n")
                         
-        print("[*] Sending proposed manifest to server...")
-        self.sendfile("proposed_manifest.txt")
-        print("[+] Proposed manifest sent")
+        print("[*] Sending client manifest to server...")
+        self.sendfile("client_manifest.txt")
+        print("[+] Client manifest sent")
         
         # method 1...
         # server_manifest = self.check_server_manifest()
@@ -233,7 +233,7 @@ class Transmitter():
         s = socket.socket()
 
         # print(f"[*] Connecting to: {self.host}:{self.port}")
-        if "proposed_manifest" in filename:
+        if "client_manifest" in filename:
             s.connect((self.host, 5002))
             print(f"[*] Connecting to: {self.host}:5002")
         else:
@@ -241,7 +241,8 @@ class Transmitter():
             print(f"[*] Connecting to: {self.host}:{self.port}")
         print("[+] connected\n")
         
-        if "SENDCOMPLETE" not in filename and "proposed_manifest" not in filename:
+        # if "SENDCOMPLETE" not in filename and "client_manifest" not in filename:
+        if "SENDCOMPLETE" not in filename:
             filesize = os.path.getsize(filename)
         else:
             filesize = 10

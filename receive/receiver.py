@@ -42,7 +42,7 @@ class Receiver():
         self.sendback_address = address[0]
         print(self.sendback_address)
         print(f"[+] Client {address} has established a connection")
-        print("[*] Awaiting proposed manifest...")
+        print("[*] Awaiting client manifest...")
  
         with open(self.logfile, "w") as f:
             f.write(f"====BEGIN RECEIVE OPERATION=====\n\nDTG: {timenow}\nDirectory: {self.backup_dir}\nClient: {self.sendback_address}\n\n")
@@ -53,7 +53,7 @@ class Receiver():
         filename = os.path.basename(path)
         filesize = int(filesize)
  
-        if 'proposed_manifest' not in path:
+        if 'client_manifest' not in path:
             print("[!] Not a recognised manifest")
             with open(self.logfile, "a") as f:
                 f.write("[!] Invalid client manifest")
@@ -69,19 +69,19 @@ class Receiver():
                         break
                     f.write(bytes_read)
                     progress.update(len(bytes_read))
-            proposed_manifest = filename
-            print(f"[+] Proposed manifest received: {proposed_manifest}")
+            client_manifest = filename
+            print(f"[+] Client manifest received: {client_manifest}")
  
-        server_manifest = self.check_proposed_manifest(proposed_manifest)
+        server_manifest = self.check_client_manifest(client_manifest)
         self.send_server_manifest(server_manifest)
         client_socket.close()
         s.close()
         self.receive()
  
-    def check_proposed_manifest(self, proposed_manifest):
-        print(f"[*] Checking proposed manifest: {proposed_manifest}...")
+    def check_client_manifest(self, client_manifest):
+        print(f"[*] Checking client manifest: {client_manifest}...")
  
-        proposed_manifest_filecount = 0
+        client_manifest_filecount = 0
  
         server_manifest_file = "server_manifest.txt" # eventually give this a dated name
  
@@ -90,11 +90,11 @@ class Receiver():
  
         # Investigate why this only adds 363 of the 965 files in the backup dir...
         # Maybe its a RAM issue. Should I change this to a filename.find("text") function?
-        with open(proposed_manifest, "r") as pfile:
+        with open(client_manifest, "r") as pfile:
             for line in pfile.readlines():
                 file = tuple(line.split(", "))
                 file_name = file[0].replace("\\", "/")
-                proposed_manifest_filecount += 1
+                client_manifest_filecount += 1
                 if os.path.exists(file_name): # try changing to isfile to fix above?
                     print(f"{file_name} is present")
                     pass
@@ -115,7 +115,7 @@ class Receiver():
  
         else:
             with open(self.logfile, "a") as f:
-                f.write(f"Client manifest files: {str(proposed_manifest_filecount)}\n")
+                f.write(f"Client manifest files: {str(client_manifest_filecount)}\n")
                 f.write(f"Server manifest files: {str(self.files_requested)}\n\n")
  
  

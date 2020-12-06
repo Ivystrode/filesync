@@ -3,6 +3,7 @@ dl_manager.py
 *.tar.gz
 proposed_manifest.txt
 server_manifest.txt
+client_manifest.txt
 *File_Root/
 Transmit_logs/
 Receive_logs/
