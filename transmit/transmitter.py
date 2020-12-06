@@ -163,7 +163,7 @@ class Transmitter():
                     # file_modded_date =  os.path.getmtime(item[0] + "\\" + file)
                     filecount += 1
                     with open("client_manifest.txt", "a") as f:
-                        f.write(f"{file_namepath}, {file_modded_date}\n")
+                        f.write(f"{file_namepath}{self.SEPARATOR}{file_modded_date}\n")
                         
         with open(self.logfile, "a") as f:
                 f.write(f"\n[*] Files sent in client manifest: {str(filecount)}\n")
