@@ -90,7 +90,7 @@ class Receiver():
  
         with open(client_manifest, "r") as pfile:
             for line in tqdm(pfile.readlines()):
-                file = tuple(line.split(", "))
+                file = tuple(line.split(f"{self.SEPARATOR}"))
                 file_name = file[0].replace("\\", "/")
                 client_manifest_filecount += 1
                 if os.path.exists(file_name): # try changing to isfile to fix above?
