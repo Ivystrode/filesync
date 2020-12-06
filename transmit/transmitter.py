@@ -83,8 +83,8 @@ class Transmitter():
                     today = calendar.day_name[weekday_number]
                     
                     for day in self.backup_day:
-                        if day.lower() == today.lower():
-                            print(f"{day}: Backup today")
+                        if day.lower() == today.lower() and timenow < self.backup_timerange[0]:
+                            print(f"{day}: Backup will commence at: {self.backup_timerange[0]}")
                             
                             if self.backup_timerange[0] <= datetime.now().strftime("%H%M") < self.backup_timerange[1]:
                                 print("[+] Backup window open")
@@ -99,7 +99,7 @@ class Transmitter():
                                     
                                     # Begin logging the backup operation
                                     with open(self.logfile, "w") as f:
-                                        f.write(f"=====BEGIN TRANSMIT OPERATION=====\n\nDTG: {timenow}\nDirectory: {self.backup_dir}\nServer: {self.host}:{self.port}\nSchedule: {self.backup_timerange} - {self.backup_day}\n\n")
+                                        f.write(f"=====BEGIN TRANSMIT OPERATION=====\n\nDTG: {logfiletime}\nDirectory: {self.backup_dir}\nServer: {self.host}:{self.port}\nSchedule: {self.backup_timerange} - {self.backup_day}\n\n")
                                     
                                     server_manifest = self.create_manifest_proposal()
                                     self.start_backup(server_manifest)
@@ -124,8 +124,15 @@ class Transmitter():
                                     shutil.move(self.logfile, "Transmit_logs")
                                     #recursively call self.run_scheduler again so the backup process can restart?
                                     #maybe for some errors - check what the exception/err is and decide based on that
-                            else:
-                                print("Waiting for backup window...")
+                                    #right now it seems like it will keep looping but the script freezes because it can't duplicate the logfile
+                                    # SOLUTION: time.sleep(60) at least so at least the logfile will be named differently and won't freeze the script?
+                                    # that way at least it will keep trying
+                                    time.sleep(61)
+                                    # tried complicated methods of creating new log files each times it tries but...its just not worth it when this works
+                                    
+                            if timenow >= self.backup_timerange[1] and backup_complete:
+                                print("Backup window closed")
+                                backup_complete = False
                                     
                         # else:
                         #     print(f"{day}: No backup today")
@@ -138,9 +145,7 @@ class Transmitter():
                         
                 time.sleep(5)
             
-            if timenow >= self.backup_timerange[1] and backup_complete:
-                print("Backup window closed")
-                backup_complete = False
+
                 
             time.sleep(5)
 
@@ -365,7 +370,7 @@ if __name__ == '__main__':
     rpi_backup = Transmitter("192.168.0.217", 
                          5001, 
                          ['daily'], 
-                         ("0001", "2359"), 
+                         ("2150", "2155"), 
                          "File_Root",
                          encrypt=True)
     
