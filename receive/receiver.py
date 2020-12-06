@@ -89,15 +89,15 @@ class Receiver():
             s.write("")
  
         with open(client_manifest, "r") as pfile:
-            for line in pfile.readlines():
+            for line in tqdm(pfile.readlines()):
                 file = tuple(line.split(", "))
                 file_name = file[0].replace("\\", "/")
                 client_manifest_filecount += 1
                 if os.path.exists(file_name): # try changing to isfile to fix above?
-                    print(f"{file_name} is present")
+                    # print(f"{file_name} is present")
                     pass
                 else:
-                    print(f"Adding: {file_name} to server manifest")
+                    # print(f"Adding: {file_name} to server manifest")
                     self.files_requested += 1
                     with open(server_manifest_file, "a") as sfile:
                         sfile.write(file_name + "\n")
