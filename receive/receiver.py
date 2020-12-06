@@ -156,13 +156,11 @@ class Receiver():
         destination_folder = os.getcwd() + "/" + destination_file.replace(filename, "")
  
  
-        print(f"\nSorting: {filename} to: \n{destination_file}\n")
+        print(f"\nSorting: {filename} to: \n{destination_file}")
         if not os.path.exists(destination_folder):
             os.makedirs(destination_folder)
-            print("folder made")
         shutil.move(filename, destination_file)
         self.files_received += 1
-        print("Moved")
  
     def close_connection(self, client_socket, s, address, *args):
  
@@ -203,7 +201,7 @@ class Receiver():
         print(f"[*] Listening as {self.SERVER_HOST}:{self.SERVER_PORT}")
         while True:
             client_socket, address = s.accept()
-            print(f"[+] {address} connected!!")
+            print(f"[+] Incoming data from: {address}")
  
             try:
                 received = client_socket.recv(self.BUFFER_SIZE).decode()

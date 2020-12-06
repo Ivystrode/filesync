@@ -1,6 +1,6 @@
 Program to backup files to offsite locations
 
-- NOTE - rsync may be easier and safer for this. However this may be a way to transmit the IP address of this server to another server and vice versa by sending it in a text file...
+- NOTE - rsync may be easier and safer for this. But I enjoyed making this and it will still be a good way for different machines to regularly update each other on what their current IP is
 
 CURRENT BEST WORKING STATE:
 Transmitter class takes host, port, list of days to back up and time range in a tuple and then runs scheduled backups
@@ -10,16 +10,11 @@ All actions are logged to a dated logfile and stored in a log directory
 sendthis directories gitignored
 use sendthis folders to send files, dont include test files in git commits
 
-ISSUE:
-For some reason server manifest stops appending at: File_Root\Iain Banks book collection\The Business\metadata.opf, Fri Aug 10 15:20:20 2012
-This is 363 files of 965 in the proposed manifest/folder structure
-Why does it do this
 
 To do
 - Add scheduler function to receiver
 - Add ability to send files if modified date is changed
-- Consider dating each proposed manifest so receiver can check it (and vice versa)
-- The manifests could then be stored in a log folder...
+- Delete manifest files when done with them...not massively important though
 - SECURITY - add function to shut down file transfer if a file that is not on the manifest is detected
 - A warning must then be sent ie Telegram bot integration and/or email
     - Warning 1 is sent
