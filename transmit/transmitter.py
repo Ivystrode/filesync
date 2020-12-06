@@ -8,7 +8,7 @@ import shutil
 
 class Transmitter():
     
-    def __init__(self, host, port, backup_day, backup_timerange, backup_dir):
+    def __init__(self, host, port, backup_day, backup_timerange, backup_dir, **kwargs):
         self.host = host
         self.port = port
         self.backup_day = backup_day
@@ -21,7 +21,11 @@ class Transmitter():
         self.files_sent = 0
         self.files_unknown = 0
         
-        self.weekdays = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday']
+        self.logfile = ""
+        
+        weekdays = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday']
+        
+        # IF ENCRYPT = TRUE THEN WE'RE GOING TO ENCRYPT EACH FILE
         
         if port > 65535:
             print("\n[!] Invalid Port\n")
@@ -35,11 +39,11 @@ class Transmitter():
             
         if "daily" not in self.backup_day:
             for day in self.backup_day:
-                if day.lower() not in self.weekdays:
+                if day.lower() not in weekdays:
                     print(f"\n[!] Invalid Backup Day: {day}\n")
                     exit()
         else:
-            self.backup_day = self.weekdays
+            self.backup_day = weekdays
             print("\n[!] Backups will occur daily\n")
             # print(self.backup_day)
         print(self.backup_day)
@@ -49,8 +53,7 @@ class Transmitter():
             print("The start time must be earlier than the finish time")
             exit()            
         
-        self.timenow = datetime.now().strftime("%Y%m%d%H%M")
-        self.logfile = f"{self.timenow}_Transmit_Log"
+
         
     def run_scheduler(self):    
         """
@@ -91,10 +94,12 @@ class Transmitter():
                                     # add this try/except block to a separate function so that a backup can be run singly rather than on a schedule
                                     # as well, so that user has another option/mthod of backup
                                     print("[*] Beginning backup")
+                                    logfiletime = datetime.now().strftime("%Y%m%d%H%M")
+                                    self.logfile = f"{logfiletime}_Transmit_Log"
                                     
                                     # Begin logging the backup operation
                                     with open(self.logfile, "w") as f:
-                                        f.write(f"=====BEGIN TRANSMIT OPERATION=====\n\nDTG: {self.timenow}\nDirectory: {self.backup_dir}\nServer: {self.host}:{self.port}\nSchedule: {self.backup_timerange} - {self.backup_day}\n\n")
+                                        f.write(f"=====BEGIN TRANSMIT OPERATION=====\n\nDTG: {timenow}\nDirectory: {self.backup_dir}\nServer: {self.host}:{self.port}\nSchedule: {self.backup_timerange} - {self.backup_day}\n\n")
                                     
                                     server_manifest = self.create_manifest_proposal()
                                     self.start_backup(server_manifest)
@@ -152,7 +157,6 @@ class Transmitter():
         if os.path.exists("client_manifest.txt"):
             with open("client_manifest.txt", "w") as f:
                 f.write("")
-                print("previous manifest deleted")
         
         print("[*] Writing manifest")
         for item in os.walk(self.backup_dir):
@@ -362,7 +366,8 @@ if __name__ == '__main__':
                          5001, 
                          ['daily'], 
                          ("0001", "2359"), 
-                         "File_Root")
+                         "File_Root",
+                         encrypt=True)
     
     # local_test = Transmitter("10.248.220.31", # does this not work because its on the same computer? try with the laptop
     #                      5001, 
