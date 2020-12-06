@@ -243,7 +243,7 @@ class Transmitter():
         else:
             s.connect((self.host,self.port))
             print(f"[*] Connecting to: {self.host}:{self.port}")
-        print("[+] connected\n")
+        print("[+] connected")
         
         # if "SENDCOMPLETE" not in filename and "client_manifest" not in filename:
         if "SENDCOMPLETE" not in filename:
