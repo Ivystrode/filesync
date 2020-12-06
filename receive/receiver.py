@@ -174,8 +174,8 @@ class Receiver():
             s.close()            
             print(f"[-] Terminate command received from client: {address}")
             print(f"[-] Connection to {address} closed")
-            print(f"[-] {self.files_requested)} files requested") # minus 1 to account for the blank line at EOF?
-            print(f"[-] {self.files_received)} files received")
+            print(f"[-] {self.files_requested} files requested") # minus 1 to account for the blank line at EOF?
+            print(f"[-] {self.files_received} files received")
  
             with open(self.logfile, "a") as f:            
                 f.write(f"[-] Terminate command received from client: {address}\n")
