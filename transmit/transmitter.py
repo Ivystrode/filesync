@@ -255,7 +255,7 @@ class Transmitter():
 
         if filename != "SENDCOMPLETE":
             try:
-                progress = tqdm.tqdm(range(filesize), f"\nSending {filename}", unit="B", unit_scale=True, unit_divisor=1024)
+                progress = tqdm.tqdm(range(filesize), f"[*] Sending {filename}", unit="B", unit_scale=True, unit_divisor=1024)
                 with open(filename, "rb") as f:
                     for _ in progress:
                         try:
@@ -275,7 +275,7 @@ class Transmitter():
                 self.files_unknown += 1
                 
                     
-            print("\n[+] File sent: " + filename)
+            print("[+] File sent: " + filename)
             
         s.close()
         
@@ -296,10 +296,10 @@ class Transmitter():
                     break
                 
                 if os.path.exists(file):
-                    print(f"Located: {file}")
+                    print(f"[+] Located: {file}")
                     
                     try:
-                        print(file)
+                        # print(file)
                         self.sendfile(file)
                         print("[+] SENT ON ATTEMPT 1\n")
                         with open(self.logfile, "a") as f:

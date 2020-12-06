@@ -154,7 +154,7 @@ class Receiver():
         destination_folder = os.getcwd() + "/" + destination_file.replace(filename, "")
  
  
-        print(f"\nSorting: {filename} to: \n{destination_file}")
+        print(f"Sorting: {filename} to: \n{destination_file}")
         if not os.path.exists(destination_folder):
             os.makedirs(destination_folder)
         shutil.move(filename, destination_file)
@@ -174,7 +174,7 @@ class Receiver():
             s.close()            
             print(f"[-] Terminate command received from client: {address}")
             print(f"[-] Connection to {address} closed")
-            print(f"[-] {self.files_requested} files requested")
+            print(f"[-] {str(self.files_requested - 1)} files requested") # minus 1 to account for the blank line at EOF
             print(f"[-] {self.files_received} files received")
  
             with open(self.logfile, "a") as f:            
@@ -199,7 +199,7 @@ class Receiver():
         print(f"[*] Listening as {self.SERVER_HOST}:{self.SERVER_PORT}")
         while True:
             client_socket, address = s.accept()
-            print(f"[+] Incoming data from: {address}")
+            print(f"\n[+] Incoming data from: {address}")
  
             try:
                 received = client_socket.recv(self.BUFFER_SIZE).decode()
