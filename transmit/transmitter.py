@@ -366,6 +366,9 @@ class Transmitter():
     
 
 if __name__ == '__main__':
+    # eventually lets make this so that it can be activated by adding arguments to the command line, like:
+    # python transmitter.py -server "192.168.0.16" -port 5001 -backup_days ['daily'] -backup_timerange ("1300", "1400") -encrypt=True
+    # this means another script can import and use the Transmitter or a user can just activate it on the command line
     
     rpi_backup = Transmitter("192.168.0.217", 
                          5001, 
