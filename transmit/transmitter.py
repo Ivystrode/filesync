@@ -5,6 +5,7 @@ from datetime import datetime, date
 import calendar
 import os
 import shutil
+import argparse
 
 class Transmitter():
     
@@ -83,8 +84,9 @@ class Transmitter():
                     today = calendar.day_name[weekday_number]
                     
                     for day in self.backup_day:
-                        if day.lower() == today.lower() and timenow < self.backup_timerange[0]:
+                        if day.lower() == today.lower(): #and timenow < self.backup_timerange[0]: # why was this here in the first place???
                             print(f"{day}: Backup will commence at: {self.backup_timerange[0]}")
+                            
                             
                             if self.backup_timerange[0] <= datetime.now().strftime("%H%M") < self.backup_timerange[1]:
                                 print("[+] Backup window open")
@@ -366,23 +368,34 @@ class Transmitter():
     
 
 if __name__ == '__main__':
-    # eventually lets make this so that it can be activated by adding arguments to the command line, like:
-    # python transmitter.py -server "192.168.0.16" -port 5001 -backup_days ['daily'] -backup_timerange ("1300", "1400") -encrypt=True
-    # this means another script can import and use the Transmitter or a user can just activate it on the command line
     
-    rpi_backup = Transmitter("192.168.0.217", 
-                         5001, 
-                         ['daily'], 
-                         ("2150", "2155"), 
-                         "File_Root",
-                         encrypt=True)
+    weekdays = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday','daily']
     
-    # local_test = Transmitter("10.248.220.31", # does this not work because its on the same computer? try with the laptop
-    #                      5001, 
-    #                      ['daily'], 
-    #                      ("1116", "1700"), 
-    #                      "sendthis")
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-s", "--server", help="The IP address of the server to send files to", type=str, required=True)
+    parser.add_argument("-p", "--port", help="Port to send on - the server must be receiving on the same port", type=int, default=5001)
+    parser.add_argument("-d", "--days", help="Days to perform backup. Enter daily to backup every day.", type=str, nargs='*', choices=weekdays, required=True)
+    parser.add_argument("-t", "--timerange", help="Time (in 24hr format with no symbols) to begin and end the backup window", type=str, nargs='*', default = ("1333", "1400"))
+    parser.add_argument("-f", "--folder", help="Relative path of the folder (directory) you want transferred & backed up", type=str, required=True)
+    parser.add_argument("-e", "--encrypt", help="Encrypt files on transfer - True/False", type=bool, default=False)
     
-    rpi_backup.run_scheduler()
+    # parser.add_argument("-v", "--verbose", help="increase output verbosity",
+    #                 action="store_true")
+    
+    args = parser.parse_args()
+    
+    backer_upper = Transmitter(
+        vars(args)['server'],
+        vars(args)['port'],
+        vars(args)['days'],
+        vars(args)['timerange'],
+        vars(args)['folder'],
+        # vars(args)['encrypt'], # how to give an optional kwarg in argparse
+    )
+    
+    print("************")
+    print(vars(backer_upper))
+    
+    backer_upper.run_scheduler()
 
         

@@ -7,3 +7,5 @@ client_manifest.txt
 *File_Root/
 Transmit_logs/
 Receive_logs/
+__pycache__/
+*Transmit_log
