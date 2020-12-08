@@ -417,6 +417,7 @@ if __name__ == '__main__':
     
     run_transmitter = input("Run Transmitter now? y/n\n>>>")
     if run_transmitter == "y":
+        print("Transmitter scheduler active...")
         backupper.run_scheduler()
     else:
         print("Exiting...")
