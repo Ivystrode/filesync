@@ -47,12 +47,18 @@ class Transmitter():
             self.backup_day = weekdays
             print("\n[!] Backups will occur daily\n")
             # print(self.backup_day)
-        print(self.backup_day)
+        # print("Backing up on the following days:")
+        # print(self.backup_day)
                 
         if backup_timerange[0] >= backup_timerange[1]:
             print("\n[!] Invalid Time Range\n")
             print("The start time must be earlier than the finish time")
             exit()            
+            
+        if not os.path.isdir(self.backup_dir):
+            print("\n[!] Invalid backup directory\n")
+            print("Path does not exist")
+            exit()
         
 
         
@@ -85,7 +91,7 @@ class Transmitter():
                     
                     for day in self.backup_day:
                         if day.lower() == today.lower(): #and timenow < self.backup_timerange[0]: # why was this here in the first place???
-                            print(f"{day}: Backup will commence at: {self.backup_timerange[0]}")
+                            # print(f"{day}: Backup will commence at: {self.backup_timerange[0]}")
                             
                             
                             if self.backup_timerange[0] <= datetime.now().strftime("%H%M") < self.backup_timerange[1]:
@@ -365,37 +371,55 @@ class Transmitter():
             f.write(f"\n[*] {self.files_sent} files sent")
             f.write(f"\n[*] {self.files_unknown} requested files not located")
             f.write(f"\n[-] Connection closed to: {self.host}:{self.port}")
+        self.files_sent = 0
+        self.files_unknown = 0
     
 
 if __name__ == '__main__':
     
     weekdays = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday','daily']
     
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-s", "--server", help="The IP address of the server to send files to", type=str, required=True)
-    parser.add_argument("-p", "--port", help="Port to send on - the server must be receiving on the same port", type=int, default=5001)
-    parser.add_argument("-d", "--days", help="Days to perform backup. Enter daily to backup every day.", type=str, nargs='*', choices=weekdays, required=True)
-    parser.add_argument("-t", "--timerange", help="Time (in 24hr format with no symbols) to begin and end the backup window", type=str, nargs='*', default = ("1333", "1400"))
-    parser.add_argument("-f", "--folder", help="Relative path of the folder (directory) you want transferred & backed up", type=str, required=True)
-    parser.add_argument("-e", "--encrypt", help="Encrypt files on transfer - True/False", type=bool, default=False)
-    
-    # parser.add_argument("-v", "--verbose", help="increase output verbosity",
-    #                 action="store_true")
+    parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter)
+    parser.add_argument("-s", "--server", help="The IP address of the server to send files to", metavar="", type=str, required=True)
+    parser.add_argument("-p", "--port", help="Port to send on - the server must be receiving on the same port", type=int, default=5001, metavar='')
+    parser.add_argument("-d", "--days", help="Days to perform backup. Enter daily to backup every day.", type=str, nargs='+', choices=weekdays, metavar='', required=True)
+    parser.add_argument("-t", "--timerange", help="Time (in 24hr format with no symbols) to begin and time end the backup window - ie 1300 1530", type=str, nargs=2, default = ("0200", "0400"), metavar='')
+    parser.add_argument("-f", "--folder", help="Relative path of the folder (directory) you want transferred & backed up", type=str, required=True, metavar='')
+    parser.add_argument("-e", "--encrypt", help="Encrypt files on transfer - sets to True if entered", default=False, action='store_true')
     
     args = parser.parse_args()
     
-    backer_upper = Transmitter(
+    # If argparse values difficult to unpack use a dictionary:
+    # arg_dict = dict((k,v) for k,v in vars(args).items() if k!="message_type") 
+    
+    backupper = Transmitter(
         vars(args)['server'],
         vars(args)['port'],
         vars(args)['days'],
-        vars(args)['timerange'],
+        tuple(vars(args)['timerange']),
         vars(args)['folder'],
-        # vars(args)['encrypt'], # how to give an optional kwarg in argparse
+        # **vars(args)['encrypt'], # how to give an optional kwarg in argparse
+
     )
     
-    print("************")
-    print(vars(backer_upper))
+    print("\n----------")
+    print("Transmitter parameters\n")
+    print(f"Backup server: {backupper.host}")
+    print(f"Port: {backupper.port}")
+    print(f"Backup days: {backupper.backup_day}")
+    print(f"Backup time window: {backupper.backup_timerange}")
+    print(f"Folder to backup: {backupper.backup_dir}")
+    if vars(args)['encrypt']:
+        print("Encryption: On")
+    else:
+        print("Encryption: Off")
+    print("----------\n")
     
-    backer_upper.run_scheduler()
+    run_transmitter = input("Run Transmitter now? y/n\n>>>")
+    if run_transmitter == "y":
+        backupper.run_scheduler()
+    else:
+        print("Exiting...")
+        exit()
 
         
