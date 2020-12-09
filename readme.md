@@ -23,7 +23,7 @@ CURRENT BEST WORKING STATE:
 To do
 - Add scheduler function to receiver
 - Add ability to send files if modified date is changed
-- Delete manifest files when done with them...not massively important though
+- VPN - auto connect to VPN just before/at beginning of backup window, use subprocess to activate ovpn?
 - SECURITY - add function to shut down file transfer if a file that is not on the manifest is detected
 - A warning must then be sent ie Telegram bot integration and/or email
     - Warning 1 is sent
