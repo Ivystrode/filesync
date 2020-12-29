@@ -115,7 +115,7 @@ class Transmitter():
                                     print("[+] Backup complete")
                                     
                                     with open(self.logfile, "a") as f:
-                                        f.write("\n\n=====END TRANSMIT OPERATION=====")
+                                        f.write("\n\n=====END TRANSMIT OPERATION=====\n")
                                     if not os.path.exists("Transmit_logs"):
                                         os.mkdir("Transmit_logs")
                                     shutil.move(self.logfile, "Transmit_logs")
@@ -126,7 +126,7 @@ class Transmitter():
                                     print(err)
                                     with open(self.logfile, "a") as f:
                                         f.write(f"[!] BACKUP ERROR: {err}\n")
-                                        f.write("\n\n=====END TRANSMIT OPERATION=====")
+                                        f.write("\n\n=====END TRANSMIT OPERATION=====\n")
                                     if not os.path.exists("Transmit_logs"):
                                         os.mkdir("Transmit_logs")
                                     shutil.move(self.logfile, "Transmit_logs")

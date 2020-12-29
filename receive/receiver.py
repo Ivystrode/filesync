@@ -93,7 +93,7 @@ class Receiver():
                 file = tuple(line.split(f"{self.SEPARATOR}"))
                 file_name = file[0].replace("\\", "/")
                 client_manifest_filecount += 1
-                if os.path.exists(file_name): # try changing to isfile to fix above?
+                if os.path.exists(self.backup_dir + file_name): # try changing to isfile to fix above?
                     # print(f"{file_name} is present")
                     pass
                 else:
@@ -150,20 +150,12 @@ class Receiver():
     def sort_file(self, path, filename):
         filename = filename.replace('\\', '/')
         destination_file = self.backup_dir + path.replace('\\','/') 
-        # destination_file = path.replace('\\', '/')  
-        # destination_folder = os.getcwd() + "/" + destination_file.replace(filename, "")
-        # destination_folder = self.backup_dir + destination_file.replace(filename, "")
         
-        print("FILE DETAILS")
-        print(filename)
-        print(destination_file)
-        print(destination_folder)
-
- 
- 
         print(f"Sorting: {filename} to: \n{destination_file}")
+        
         if not os.path.exists(destination_file.replace(filename, "")):
             os.makedirs(destination_file.replace(filename, ""))
+            
         shutil.move(filename, destination_file)
         self.files_received += 1
  
@@ -189,7 +181,7 @@ class Receiver():
                 f.write(f"[-] Connection to {address} closed\n")
                 f.write(f"[-] {self.files_requested} files requested\n")
                 f.write(f"[-] {self.files_received} files received\n")
-                f.write(f"\n\n=====END OF RECEIVE OPERATION=====")
+                f.write(f"\n\n=====END OF RECEIVE OPERATION=====\n")
             if not os.path.exists("Receive_logs"):
                 os.mkdir("Receive_logs")
             shutil.move(self.logfile, "Receive_logs")

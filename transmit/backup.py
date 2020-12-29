@@ -1,7 +1,7 @@
 import transmitter
 
 backup = transmitter.Transmitter(
-    "192.168.1.88", 
+    "PINAS", 
     5001, 
     ['daily'], 
     ("2200", "2359"), 
