@@ -157,7 +157,7 @@ class Receiver():
         print(filename)
         print(destination_file)
         print(destination_folder)
-        
+
  
  
         print(f"Sorting: {filename} to: \n{destination_file}")
@@ -252,5 +252,5 @@ class Receiver():
         s.close()
  
 if __name__ == '__main__':
-    backup = Receiver("0.0.0.0", 5001, 'File_Root')
+    backup = Receiver("0.0.0.0", 5001, '/srv/dev-disk-by-label-Data/Main/Central_repository')
     backup.start()
