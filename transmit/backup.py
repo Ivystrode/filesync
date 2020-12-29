@@ -1,10 +1,10 @@
 import transmitter
 
 backup = transmitter.Transmitter(
-    "192.168.0.217", 
+    "192.168.1.88", 
     5001, 
     ['daily'], 
-    ("1300", "1400"), 
+    ("2200", "2300"), 
     "sendthis",
     encrypt=True
 )
