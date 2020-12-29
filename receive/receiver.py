@@ -151,7 +151,8 @@ class Receiver():
         filename = filename.replace('\\', '/')
         destination_file = self.backup_dir + path.replace('\\','/') 
         # destination_file = path.replace('\\', '/')  
-        destination_folder = os.getcwd() + "/" + destination_file.replace(filename, "")
+        # destination_folder = os.getcwd() + "/" + destination_file.replace(filename, "")
+        destination_folder = self.backup_dir + destination_file.replace(filename, "")
         
         print("FILE DETAILS")
         print(filename)
