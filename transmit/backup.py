@@ -4,7 +4,7 @@ backup = transmitter.Transmitter(
     "192.168.1.88", 
     5001, 
     ['daily'], 
-    ("2200", "2300"), 
+    ("2200", "2359"), 
     "sendthis",
     encrypt=True
 )

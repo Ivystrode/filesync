@@ -22,7 +22,7 @@ class Receiver():
         self.sendback_address = ""
         self.sendback_port = 5002
  
-        self.backup_dir = backup_dir + "\\"
+        self.backup_dir = backup_dir + "/"
         print(f"BACKUP DIR IS {self.backup_dir}")
         # if not os.path.exists(self.backup_dir):
         #     os.mkdirs
