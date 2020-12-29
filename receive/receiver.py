@@ -152,7 +152,7 @@ class Receiver():
         destination_file = self.backup_dir + path.replace('\\','/') 
         # destination_file = path.replace('\\', '/')  
         # destination_folder = os.getcwd() + "/" + destination_file.replace(filename, "")
-        destination_folder = self.backup_dir + destination_file.replace(filename, "")
+        # destination_folder = self.backup_dir + destination_file.replace(filename, "")
         
         print("FILE DETAILS")
         print(filename)
@@ -162,8 +162,8 @@ class Receiver():
  
  
         print(f"Sorting: {filename} to: \n{destination_file}")
-        if not os.path.exists(destination_folder):
-            os.makedirs(destination_folder)
+        if not os.path.exists(destination_file.replace(filename, "")):
+            os.makedirs(destination_file.replace(filename, ""))
         shutil.move(filename, destination_file)
         self.files_received += 1
  
