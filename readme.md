@@ -31,3 +31,5 @@ To do
     - Second warning message will be sent if script seems to be successful in deleting it
     - Separate thread can detect an emergency shutdown message from telegram
 - Add file encryption/decryption?
+- Also put transmitter on server/NAS to regularly "downlink" files.
+    - When we have multiple computers all backing up to the directory on the NAS, the downlink transmitter will regularly update the clients!
