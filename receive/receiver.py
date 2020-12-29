@@ -150,7 +150,7 @@ class Receiver():
     def sort_file(self, path, filename):
         filename = filename.replace('\\', '/')
         destination_file = self.backup_dir + path 
-        destination_file = path.replace('\\', '/')  
+        # destination_file = path.replace('\\', '/')  
         destination_folder = os.getcwd() + "/" + destination_file.replace(filename, "")
         
         print("FILE DETAILS")
