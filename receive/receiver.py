@@ -152,12 +152,34 @@ class Receiver():
         destination_file = self.backup_dir + path.replace('\\','/') 
         
         print(f"Sorting: {filename} to: \n{destination_file}")
+        self.check_file(path, filename, destination_file)
         
         if not os.path.exists(destination_file.replace(filename, "")):
             os.makedirs(destination_file.replace(filename, ""))
+            # need to check for actual file as well? ::
+        # if not os.path.exists(destination_file):
+        #     os.makedirs(destination_file.replace(filename, ""))
+            # and then move the below 2 lines into this tab
             
         shutil.move(filename, destination_file)
         self.files_received += 1
+        
+    def check_file(self, path, filename, destination):
+        print("Path: " + path)
+        print("Filename: " + filename)
+        print("Destination filepathname:" + destination)
+        print("Destination directory path:" + destination.replace(filename, ""))
+       
+    # Function to check modified time: 
+    # def more_recently_modified(f1, f2):
+    #     f1_mtime = os.path.getmtime(f1)
+    #     f2_mtime = os.path.getmtime(f2)
+        
+    #     if f1_mtime > f2_mtime:
+    #         print(f1 + " was more recently modified")
+    #     else:
+    #         print(f2 + " was more recently modified")
+
  
     def close_connection(self, client_socket, s, address, *args):
  
