@@ -192,7 +192,7 @@ class Receiver():
             server_file_mtime = os.path.getmtime(destination_file)
             
             print("Server file mtime: " + str(server_file_mtime))
-            print("Client file mtime: " + client_file_mtime)
+            print("Client file mtime: " + float(client_file_mtime))
             
             if server_file_mtime < client_file_mtime:
                 print("Server's version is out of date, we need this file")
