@@ -95,7 +95,7 @@ class Receiver():
                 file_mtime = file[1]
                 client_manifest_filecount += 1
                 
-                if self.check_file_needed(self, file_name, file_mtime) == True:
+                if self.check_file_needed(file_name, file_mtime) == True:
                     print(f"Adding: {file_name} to server manifest")
                     self.files_requested += 1
                     with open(server_manifest_file, "a") as sfile:
