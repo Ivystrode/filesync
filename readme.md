@@ -12,7 +12,7 @@ CURRENT BEST WORKING STATE:
     - Whether you want to encrypt the files before sending them (will need to be decrypted on the other end)
 2. Client machine then sends a list of all files in the directory to the server - the 'Client Manifest'
 3. Server then compares the client manifest to the files it currently holds
-4. Server notes all files that are on the client manifest but ***not*** currently on the server into a file called the 'Server Manifest'
+4. The server compares the client manifest with the files in the backup directory - if it doesn't have them, or if it does but the last modified time is earlier than the client's version, it adds this file to the 'Server Manifest'
 5. Server sends the server manifest back to the client
 6. Client sends all files listed on the server manifest to the server
 7. When all files are sent, the client sends a command to the server to terminate the connection
@@ -22,7 +22,6 @@ CURRENT BEST WORKING STATE:
 
 To do
 - Add scheduler function to receiver
-- Add ability to send files if modified date is changed
 - VPN - auto connect to VPN just before/at beginning of backup window, use subprocess to activate ovpn?
 - SECURITY - add function to shut down file transfer if a file that is not on the manifest is detected
 - A warning must then be sent ie Telegram bot integration and/or email
