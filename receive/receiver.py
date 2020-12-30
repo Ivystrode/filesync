@@ -92,16 +92,28 @@ class Receiver():
             for line in tqdm(pfile.readlines()):
                 file = tuple(line.split(f"{self.SEPARATOR}"))
                 file_name = file[0].replace("\\", "/")
+                file_mtime = file[1]
                 client_manifest_filecount += 1
-                if os.path.exists(self.backup_dir + file_name): # try changing to isfile to fix above?
-                    # print(f"{file_name} is present")
-                    pass
-                else:
-                    # print(f"Adding: {file_name} to server manifest")
+                
+                if self.check_file_needed(self, file_name, file_mtime) == True:
+                    print(f"Adding: {file_name} to server manifest")
                     self.files_requested += 1
                     with open(server_manifest_file, "a") as sfile:
                         sfile.write(file_name + "\n")
                         time.sleep(0.1)
+                else:
+                    print(f"{file_name} is present")
+                    pass
+                
+                # if os.path.exists(self.backup_dir + file_name): # try changing to isfile to fix above?
+                #     # print(f"{file_name} is present")
+                #     pass
+                # else:
+                #     # print(f"Adding: {file_name} to server manifest")
+                #     self.files_requested += 1
+                #     with open(server_manifest_file, "a") as sfile:
+                #         sfile.write(file_name + "\n")
+                #         time.sleep(0.1)
  
         if not os.path.exists(server_manifest_file):
             print("[-] No files required")
@@ -152,7 +164,7 @@ class Receiver():
         destination_file = self.backup_dir + path.replace('\\','/') 
         
         print(f"Sorting: {filename} to: \n{destination_file}")
-        self.check_file(path, filename, destination_file)
+        # self.check_file(path, filename, destination_file)
         
         if not os.path.exists(destination_file.replace(filename, "")):
             os.makedirs(destination_file.replace(filename, ""))
@@ -164,11 +176,36 @@ class Receiver():
         shutil.move(filename, destination_file)
         self.files_received += 1
         
-    def check_file(self, path, filename, destination):
-        print("Path: " + path)
-        print("Filename: " + filename)
-        print("Destination filepathname:" + destination)
-        print("Destination directory path:" + destination.replace(filename, ""))
+    def check_file_needed(self, client_file, client_file_mtime):
+        destination_file = self.backup_dir + client_file        
+        have_file = False
+        have_latest_version = False
+        
+        print("Checking existence of: " + str(destination_file))
+        print("With client file: " + str(client_file))
+        
+        if os.path.exists(destination_file):
+            have_file = True
+            print("MATCH: " + str(destination_file) + " ---> " + str(client_file))
+            print("Checking modified times...")
+            
+            server_file_mtime = os.path.getmtime(destination_file)
+            client_file_mtime = os.path.getmtime()
+            
+            print("Server file mtime: " + str(server_file_mtime))
+            print("Client file mtime: " + str(client_file_mtime))
+            
+            if server_file_mtime < client_file_mtime:
+                print("Server's version is out of date, we need this file")
+                return True
+            else:
+                print("Server's version is the same version (same last modified date)")
+                return False
+            
+        else:
+            print("File not found - get it from the client")
+            have_file = False            
+            return True 
        
     # Function to check modified time: 
     # def more_recently_modified(f1, f2):

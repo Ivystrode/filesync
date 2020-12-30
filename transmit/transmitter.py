@@ -176,7 +176,8 @@ class Transmitter():
             if len(item[2]) > 0:
                 for file in item[2]:
                     file_namepath = item[0] + "\\" + file
-                    file_modded_date =  time.ctime(os.path.getmtime(item[0] + "\\" + file))
+                    # file_modded_date =  time.ctime(os.path.getmtime(item[0] + "\\" + file))
+                    file_modded_date =  os.path.getmtime(item[0] + "\\" + file)
                     # file_modded_date =  os.path.getmtime(item[0] + "\\" + file)
                     filecount += 1
                     with open("client_manifest.txt", "a") as f:
