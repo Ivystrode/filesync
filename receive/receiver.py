@@ -171,12 +171,13 @@ class Receiver():
         # self.check_file(path, filename, destination_file)
         
         if not os.path.exists(destination_file.replace(filename, "")):
+            print("making dir")
             os.makedirs(destination_file.replace(filename, ""))
             # need to check for actual file as well? ::
         # if not os.path.exists(destination_file):
         #     os.makedirs(destination_file.replace(filename, ""))
             # and then move the below 2 lines into this tab
-            
+        print("moving file")
         shutil.move(filename, destination_file)
         self.files_received += 1
         
@@ -295,9 +296,10 @@ class Receiver():
  
                     with open(self.logfile, "a") as f:
                         f.write(f"[+] File received: {filename}\n")
-            except:
+            except Exception as e:
                 time.sleep(5)
                 print("[!] FILE RECEIVE ERROR - RETRYING")
+                print(e)
                 with open(self.logfile, "a") as f:
                     f.write(f"[!] FILE RECEIVE ERROR: {filename}\n")
                 time.sleep(5)
