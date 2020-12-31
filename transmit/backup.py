@@ -4,7 +4,7 @@ backup = transmitter.Transmitter(
     "PINAS", 
     5001, 
     ['daily'], 
-    ("1800", "2359"), 
+    ("1700", "2359"), 
     "sendthis",
     encrypt=True
 )

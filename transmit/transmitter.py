@@ -339,7 +339,7 @@ class Transmitter():
                                     f.write(f"\n[!] FILE NOT SENT: {file}")
                                     
                                 pass
-                            
+                    time.sleep(0.1)
                     self.files_sent += 1
                     
                 else:

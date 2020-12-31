@@ -19,6 +19,7 @@ class Receiver():
         self.files_requested = 0
         self.files_received = 0
  
+        self.self.client_name = "N/A"
         self.sendback_address = ""
         self.sendback_port = 5002
  
@@ -40,15 +41,15 @@ class Receiver():
  
         client_socket, address = s.accept()
         self.sendback_address = address[0]
-        client_name = socket.gethostbyaddr(address[0])[0]
+        self.client_name = socket.gethostbyaddr(address[0])[0]
         
         # print(self.sendback_address)
-        # print(client_name)
-        print(f"[+] Client {client_name}: {self.sendback_address} has established a connection")
+        # print(self.client_name)
+        print(f"[+] Client {self.client_name}: {self.sendback_address} has established a connection")
         print("[*] Awaiting client manifest...")
  
         with open(self.logfile, "w") as f:
-            f.write(f"====BEGIN RECEIVE OPERATION=====\n\nDTG: {timenow}\nDirectory: {self.backup_dir}\nClient: {client_name} ({self.sendback_address})\n\n")
+            f.write(f"====BEGIN RECEIVE OPERATION=====\n\nDTG: {timenow}\nDirectory: {self.backup_dir}\nClient: {self.client_name} ({self.sendback_address})\n\n")
  
         received = client_socket.recv(self.BUFFER_SIZE).decode()
         path, filesize = received.split(self.SEPARATOR)
@@ -99,13 +100,13 @@ class Receiver():
                 client_manifest_filecount += 1
                 
                 if self.check_file_needed(file_name, file_mtime) == True:
-                    print(f"Adding: {file_name} to server manifest")
+                    print(f"Adding: {file_name} to server manifest\n")
                     self.files_requested += 1
                     with open(server_manifest_file, "a") as sfile:
                         sfile.write(file_name + "\n")
                         time.sleep(0.1)
                 else:
-                    print(f"{file_name} is present")
+                    print(f"{file_name} is not needed\n")
                     pass
                 
                 # if os.path.exists(self.backup_dir + file_name): # try changing to isfile to fix above?
@@ -157,10 +158,10 @@ class Receiver():
  
                 s.sendall(bytes_read)
                 progress.update(len(bytes_read))
-            print(f"\n[+] Server manifest sent to client {self.sendback_address}")
+            print(f"\n[+] Server manifest sent to {self.client_name} ({self.sendback_address})")
         s.close()
         with open(self.logfile, "a") as f:
-            f.write(f"[+] Server manifest sent to {self.sendback_address}\n")
+            f.write(f"[+] Server manifest sent to {self.client_name}\n")
  
     def sort_file(self, path, filename):
         filename = filename.replace('\\', '/')
@@ -184,7 +185,7 @@ class Receiver():
         have_file = False
         have_latest_version = False
         
-        print("Checking existence of: " + str(destination_file))
+        print("\n-+-+-+-+-+-+-\nChecking existence of: " + str(destination_file))
         print("With client file: " + str(client_file))
         
         if os.path.exists(destination_file):
@@ -225,21 +226,21 @@ class Receiver():
         if args:
             print("[!] RETRYING CONNECTION")
             with open(self.logfile, "a") as f:
-                f.write(f"[!] RETRYING CONNECTION TO: {address}\n")
+                f.write(f"[!] RETRYING CONNECTION TO: {self.client_name} ({self.sendback_address})\n")
             client_socket.close()
             s.close()
  
         if not args: # the arg will be saying that there was an error, so if none terminate connection         
             client_socket.close()
             s.close()            
-            print(f"[-] Terminate command received from client: {address}")
-            print(f"[-] Connection to {address} closed")
+            print(f"[-] Terminate command received from client: {self.client_name}")
+            print(f"[-] Connection to {self.client_name} closed")
             print(f"[-] {self.files_requested} files requested") # minus 1 to account for the blank line at EOF?
             print(f"[-] {self.files_received} files received")
  
             with open(self.logfile, "a") as f:            
-                f.write(f"[-] Terminate command received from client: {address}\n")
-                f.write(f"[-] Connection to {address} closed\n")
+                f.write(f"[-] Terminate command received from {self.client_name}\n")
+                f.write(f"[-] Connection to {self.client_name} closed\n")
                 f.write(f"[-] {self.files_requested} files requested\n")
                 f.write(f"[-] {self.files_received} files received\n")
                 f.write(f"\n\n=====END OF RECEIVE OPERATION=====\n")
@@ -259,7 +260,7 @@ class Receiver():
         print(f"[*] Listening as {self.SERVER_HOST}:{self.SERVER_PORT}")
         while True:
             client_socket, address = s.accept()
-            print(f"\n[+] Incoming data from: {address}")
+            print(f"\n[+] Incoming data from {address} - {self.client_name}")
  
             try:
                 received = client_socket.recv(self.BUFFER_SIZE).decode()
