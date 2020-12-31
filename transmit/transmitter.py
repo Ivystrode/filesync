@@ -288,7 +288,8 @@ class Transmitter():
                 print("[!] FILE SEND ERROR")
                 self.files_unknown += 1
                 
-                    
+            if filesize < 1000:
+                time.sleep(0.5) # hopefully to stop the send being interrupted...seem to have an issue with it continuing to send files but NAS not receiving them 
             print("[+] File sent: " + filename)
             
         s.close()
