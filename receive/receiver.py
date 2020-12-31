@@ -40,12 +40,15 @@ class Receiver():
  
         client_socket, address = s.accept()
         self.sendback_address = address[0]
-        print(self.sendback_address)
-        print(f"[+] Client {address} has established a connection")
+        client_name = socket.gethostbyaddr(address[0])[0]
+        
+        # print(self.sendback_address)
+        # print(client_name)
+        print(f"[+] Client {client_name}: {self.sendback_address} has established a connection")
         print("[*] Awaiting client manifest...")
  
         with open(self.logfile, "w") as f:
-            f.write(f"====BEGIN RECEIVE OPERATION=====\n\nDTG: {timenow}\nDirectory: {self.backup_dir}\nClient: {self.sendback_address}\n\n")
+            f.write(f"====BEGIN RECEIVE OPERATION=====\n\nDTG: {timenow}\nDirectory: {self.backup_dir}\nClient: {client_name} ({self.sendback_address})\n\n")
  
         received = client_socket.recv(self.BUFFER_SIZE).decode()
         path, filesize = received.split(self.SEPARATOR)
