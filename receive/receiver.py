@@ -19,7 +19,7 @@ class Receiver():
         self.files_requested = 0
         self.files_received = 0
  
-        self.self.client_name = "N/A"
+        self.client_name = "N/A"
         self.sendback_address = ""
         self.sendback_port = 5002
  
