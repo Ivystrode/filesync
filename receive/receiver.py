@@ -86,6 +86,7 @@ class Receiver():
         client_socket.close()
         s.close()
         # TO TRY AND STOP ERRNO 98 - ADDRESS ALREADY IN USE:
+        print("[*] Pausing for client...")
         time.sleep(1)
         self.receive()
  
@@ -263,9 +264,11 @@ class Receiver():
         print(self.SERVER_HOST)
         print(self.SERVER_PORT)
         s = socket.socket()
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         s.bind((self.SERVER_HOST, self.SERVER_PORT))
         s.listen(5)
         print(f"[*] Listening as {self.SERVER_HOST}:{self.SERVER_PORT}")
+
         while True:
             client_socket, address = s.accept()
             print(f"\n[+] Incoming data from {self.client_name} - {address}")

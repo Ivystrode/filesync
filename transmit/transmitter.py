@@ -367,7 +367,7 @@ class Transmitter():
         print("[*] File transmit complete, informing receiver")
         print(f"[*] {self.files_sent} files sent")
         print(f"[*] {self.files_unknown} requested files not located")
-        time.sleep(1)
+        time.sleep(2)
         self.sendfile('SENDCOMPLETE')
         
         print("[*] Terminate command sent")
