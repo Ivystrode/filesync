@@ -103,7 +103,7 @@ class Transmitter():
                                     # as well, so that user has another option/mthod of backup
                                     print("[*] Beginning backup")
                                     logfiletime = datetime.now().strftime("%Y%m%d%H%M")
-                                    self.logfile = f"{logfiletime}_Transmit_Log"
+                                    self.logfile = f"{logfiletime}_{self.host}_Transmit_Log.txt"
                                     
                                     # Begin logging the backup operation
                                     with open(self.logfile, "w") as f:
@@ -189,6 +189,7 @@ class Transmitter():
         print("[*] Sending client manifest to server...")
         self.sendfile("client_manifest.txt")
         print("[+] Client manifest sent")
+        time.sleep(1)
         
         # method 1...
         # server_manifest = self.check_server_manifest()

@@ -37,11 +37,11 @@ class Receiver():
  
  
         timenow = datetime.now().strftime("%Y%m%d%H%M")
-        self.logfile = f"{timenow}_Receive_Log.txt"
  
         client_socket, address = s.accept()
         self.sendback_address = address[0]
         self.client_name = socket.gethostbyaddr(address[0])[0]
+        self.logfile = f"{timenow}_{self.client_name}_Receive_Log.txt"
         
         # print(self.sendback_address)
         # print(self.client_name)
@@ -52,6 +52,7 @@ class Receiver():
             f.write(f"====BEGIN RECEIVE OPERATION=====\n\nDTG: {timenow}\nDirectory: {self.backup_dir}\nClient: {self.client_name} ({self.sendback_address})\n\n")
  
         received = client_socket.recv(self.BUFFER_SIZE).decode()
+        print(received)
         path, filesize = received.split(self.SEPARATOR)
  
         filename = os.path.basename(path)
@@ -261,7 +262,7 @@ class Receiver():
         print(f"[*] Listening as {self.SERVER_HOST}:{self.SERVER_PORT}")
         while True:
             client_socket, address = s.accept()
-            print(f"\n[+] Incoming data from {address} - {self.client_name}")
+            print(f"\n[+] Incoming data from {self.client_name} - {address}")
  
             try:
                 received = client_socket.recv(self.BUFFER_SIZE).decode()
