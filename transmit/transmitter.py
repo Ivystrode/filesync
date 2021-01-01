@@ -250,23 +250,26 @@ class Transmitter():
         Creates a new socket to send each individual file
         """
         s = socket.socket()
-
-        # print(f"[*] Connecting to: {self.host}:{self.port}")
-        if "client_manifest" in filename:
-            s.connect((self.host, 5002))
-            print(f"[*] Connecting to: {self.host}:5002")
-        else:
-            s.connect((self.host,self.port))
-            print(f"[*] Connecting to: {self.host}:{self.port}")
-        print("[+] connected")
         
-        # if "SENDCOMPLETE" not in filename and "client_manifest" not in filename:
+        # Get file size
         if "SENDCOMPLETE" not in filename:
             filesize = os.path.getsize(filename)
         else:
             filesize = 10
 
-        s.send(f"{filename}{self.SEPARATOR}{filesize}".encode())
+        # print(f"[*] Connecting to: {self.host}:{self.port}")
+        if "client_manifest" in filename:
+            s.connect((self.host, 5002))
+            print(f"[*] Connecting to: {self.host}:5002")
+            print("[+] connected")
+            s.send(f"{filename}{self.SEPARATOR}{filesize}".encode())
+        else:
+            s.connect((self.host,self.port))
+            print(f"[*] Connecting to: {self.host}:{self.port}")
+            
+        print("[+] connected")
+
+        # s.send(f"{filename}{self.SEPARATOR}{filesize}".encode())
 
         if filename != "SENDCOMPLETE":
             try:

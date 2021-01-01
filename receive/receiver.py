@@ -52,7 +52,9 @@ class Receiver():
             f.write(f"====BEGIN RECEIVE OPERATION=====\n\nDTG: {timenow}\nDirectory: {self.backup_dir}\nClient: {self.client_name} ({self.sendback_address})\n\n")
  
         received = client_socket.recv(self.BUFFER_SIZE).decode()
+        print("\n\n++++++++Receiving client manifest++++++++\n")
         print(received)
+        print("\n++++++++Receiving client manifest++++++++\n\n")
         path, filesize = received.split(self.SEPARATOR)
  
         filename = os.path.basename(path)
