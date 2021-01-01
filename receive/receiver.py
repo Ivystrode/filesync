@@ -22,6 +22,8 @@ class Receiver():
         self.client_name = "N/A"
         self.sendback_address = ""
         self.sendback_port = 5002
+        
+        self.backup_in_progress = False
  
         self.backup_dir = backup_dir + "/"
         print(f"BACKUP DIR IS {self.backup_dir}")
@@ -83,6 +85,8 @@ class Receiver():
         self.send_server_manifest(server_manifest)
         client_socket.close()
         s.close()
+        # TO TRY AND STOP ERRNO 98 - ADDRESS ALREADY IN USE:
+        time.sleep(1)
         self.receive()
  
     def check_client_manifest(self, client_manifest):

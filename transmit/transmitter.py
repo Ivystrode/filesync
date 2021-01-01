@@ -236,6 +236,7 @@ class Transmitter():
         # Count number of files in server manifest and write to log
         with open(server_manifest, "r") as sfile:
             for line in sfile.readlines():
+                print(line)
                 server_manifest_filecount += 1
         with open(self.logfile, "a") as f:
             f.write(f"\n[*] Files requested by server manifest: {str(server_manifest_filecount)}\n")
@@ -250,26 +251,26 @@ class Transmitter():
         Creates a new socket to send each individual file
         """
         s = socket.socket()
-        
-        # Get file size
-        if "SENDCOMPLETE" not in filename:
-            filesize = os.path.getsize(filename)
-        else:
-            filesize = 10
 
         # print(f"[*] Connecting to: {self.host}:{self.port}")
         if "client_manifest" in filename:
             s.connect((self.host, 5002))
             print(f"[*] Connecting to: {self.host}:5002")
-            print("[+] connected")
-            s.send(f"{filename}{self.SEPARATOR}{filesize}".encode())
         else:
             s.connect((self.host,self.port))
             print(f"[*] Connecting to: {self.host}:{self.port}")
-            
         print("[+] connected")
+        
+        # if "SENDCOMPLETE" not in filename and "client_manifest" not in filename:
+        if "SENDCOMPLETE" not in filename:
+            filesize = os.path.getsize(filename)
+        else:
+            filesize = 10
 
-        # s.send(f"{filename}{self.SEPARATOR}{filesize}".encode())
+        s.send(f"{filename}{self.SEPARATOR}{filesize}".encode())
+        if "client_manifest" in filename:
+            print("[*] Pausing for receiver...")
+            time.sleep(2)
 
         if filename != "SENDCOMPLETE":
             try:

@@ -1,9 +1,0 @@
-=====BEGIN TRANSMIT OPERATION=====
-
-DTG: 202101011352
-Directory: sendthis/
-Server: PINAS:5001
-Schedule: ('0001', '2359') - ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday']
-
-
-[*] Files sent in client manifest: 145
