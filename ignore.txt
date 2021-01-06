@@ -1,0 +1,7 @@
+each line in here
+can be read by the transmitter
+and if a filename/path contains it
+it will not be sent to the server
+this will include files 
+AND directories
+NO NODE_MODULES!!

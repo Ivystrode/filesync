@@ -9,7 +9,7 @@ import argparse
 
 class Transmitter():
     
-    def __init__(self, host, port, backup_day, backup_timerange, backup_dir, **kwargs):
+    def __init__(self, host, port, backup_day, backup_timerange, backup_dir, ignorefile, *args, **kwargs):
         self.host = host
         self.port = port
         self.backup_day = backup_day
@@ -23,6 +23,19 @@ class Transmitter():
         self.files_unknown = 0
         
         self.logfile = ""
+        self.ignorefile = ignorefile
+        self.ignorelist = []
+        
+        if self.ignorefile: # if it exists
+            if os.path.exists(self.ignorefile):
+                self.ignorelist = [line.strip() for line in open(self.ignorefile, "r")]
+            else:
+                print(f"Error: {self.ignorefile} not found. Make sure to use a relative path.")
+                exit()
+            
+        
+        if args:
+            self.ignorefile = args['ignore']
         
         weekdays = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday']
         
@@ -172,16 +185,29 @@ class Transmitter():
                 f.write("")
         
         print("[*] Writing manifest")
-        for item in os.walk(self.backup_dir):
-            if len(item[2]) > 0:
-                for file in item[2]:
-                    file_namepath = item[0] + "\\" + file
-                    # file_modded_date =  time.ctime(os.path.getmtime(item[0] + "\\" + file))
-                    file_modded_date =  os.path.getmtime(item[0] + "\\" + file)
-                    # file_modded_date =  os.path.getmtime(item[0] + "\\" + file)
-                    filecount += 1
-                    with open("client_manifest.txt", "a") as f:
-                        f.write(f"{file_namepath}{self.SEPARATOR}{file_modded_date}\n")
+        if self.ignorefile:
+            for item in os.walk(self.backup_dir):
+                if len(item[2]) > 0:
+                    for file in item[2]:                        
+                        file_namepath = item[0] + "\\" + file
+                        if not any(filename.lower() in file_namepath.lower() for filename in self.ignorelist):
+                            # file_modded_date =  time.ctime(os.path.getmtime(item[0] + "\\" + file))
+                            file_modded_date =  os.path.getmtime(item[0] + "\\" + file)
+                            # file_modded_date =  os.path.getmtime(item[0] + "\\" + file)
+                            filecount += 1
+                            with open("client_manifest.txt", "a") as f:
+                                f.write(f"{file_namepath}{self.SEPARATOR}{file_modded_date}\n")
+        else:                
+            for item in os.walk(self.backup_dir):
+                if len(item[2]) > 0:
+                    for file in item[2]:
+                        file_namepath = item[0] + "\\" + file
+                        # file_modded_date =  time.ctime(os.path.getmtime(item[0] + "\\" + file))
+                        file_modded_date =  os.path.getmtime(item[0] + "\\" + file)
+                        # file_modded_date =  os.path.getmtime(item[0] + "\\" + file)
+                        filecount += 1
+                        with open("client_manifest.txt", "a") as f:
+                            f.write(f"{file_namepath}{self.SEPARATOR}{file_modded_date}\n")
                         
         with open(self.logfile, "a") as f:
                 f.write(f"\n[*] Files sent in client manifest: {str(filecount)}\n")
@@ -393,6 +419,7 @@ if __name__ == '__main__':
     parser.add_argument("-t", "--timerange", help="Time (in 24hr format with no symbols) to begin and time end the backup window - ie 1300 1530", type=str, nargs=2, default = ("0200", "0400"), metavar='')
     parser.add_argument("-f", "--folder", help="Relative path of the folder (directory) you want transferred & backed up", type=str, required=True, metavar='')
     parser.add_argument("-e", "--encrypt", help="Encrypt files on transfer - sets to True if entered", default=False, action='store_true')
+    parser.add_argument("-i", "--ignore", help="A file with a list of dirs/files to ignore", type=str, required=False, metavar='')
     
     args = parser.parse_args()
     
@@ -405,6 +432,7 @@ if __name__ == '__main__':
         vars(args)['days'],
         tuple(vars(args)['timerange']),
         vars(args)['folder'],
+        vars(args)['ignore'],
         # **vars(args)['encrypt'], # how to give an optional kwarg in argparse
 
     )
@@ -416,6 +444,9 @@ if __name__ == '__main__':
     print(f"Backup days: {backupper.backup_day}")
     print(f"Backup time window: {backupper.backup_timerange}")
     print(f"Folder to backup: {backupper.backup_dir}")
+    if vars(args)['ignore']:
+        print(f"Ignore file: {backupper.ignorefile}")
+        print(f"Ignore list: {backupper.ignorelist}")
     if vars(args)['encrypt']:
         print("Encryption: On")
     else:
