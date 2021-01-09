@@ -6,15 +6,43 @@ from datetime import datetime
 import shutil
 import ntpath
 import time
+import argparse
+import calendar
  
 class Receiver():
  
-    def __init__(self, SERVER_HOST, SERVER_PORT, backup_dir):
+    def __init__(self, SERVER_HOST, SERVER_PORT, backup_day, backup_timerange, backup_dir):
         self.SERVER_HOST = SERVER_HOST
         self.SERVER_PORT = SERVER_PORT
  
         self.BUFFER_SIZE = 4096
         self.SEPARATOR = "<SEPARATOR>"
+        
+        self.backup_day = backup_day
+        self.backup_timerange = backup_timerange
+        
+        weekdays = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday']
+        if type(backup_day) != list:
+            print("\n[!] Invalid Day/s\n")
+            print("Your program must send the backup days as a list")
+            print("Backup day/s must be entered as a list even if only 1 day")
+            print("Enter 'daily' to backup every day in the alloted time window")
+            exit()
+            
+        if "daily" not in self.backup_day:
+            for day in self.backup_day:
+                if day.lower() not in weekdays:
+                    print(f"\n[!] Invalid Backup Day: {day}\n")
+                    exit()
+            print(self.backup_day)
+        else:
+            self.backup_day = weekdays
+            print("\n[!] Backups will occur daily\n")
+            
+        if backup_timerange[0] >= backup_timerange[1]:
+            print("\n[!] Invalid Time Range\n")
+            print("The start time must be earlier than the finish time")
+            exit()  
  
         self.files_requested = 0
         self.files_received = 0
@@ -31,11 +59,40 @@ class Receiver():
         #     os.mkdirs
  
         self.logfile = ""
+        
+    def run_scheduler(self):
+        print("[*] Receiver: Awaiting backup window")
+        print(f"Address: {self.SERVER_HOST}")
+        print(f"Port: {self.SERVER_PORT}")
+        print(f"Day: {self.backup_day}")
+        print(f"Timerange: {self.backup_timerange}")
+        print(f"Target: {self.backup_dir}\n")
+        
+        backup_complete = False
+        
+        while True:
+            date_today = datetime.now().strftime("%d-%m-%Y")
+            weekday_number = datetime.strptime(date_today, '%d-%m-%Y').weekday()
+            today = calendar.day_name[weekday_number]
+            
+            for day in self.backup_day:
+                if day.lower() == today.lower():
+                    # print(f"{day} - Backup commence at: {self.backup_timerange[0]}")
+
+                    if self.backup_timerange[0] <= datetime.now().strftime("%H%M") < self.backup_timerange[1]:
+                        print("[+] Backup window open")
+                        self.start()
+                
+            
+            
+            
  
     def start(self):
         s = socket.socket()
         s.bind((self.SERVER_HOST, 5002))
         s.listen(5)
+        
+        print(f"[+] {socket.gethostname()}: Listening for client connections...")
  
  
         timenow = datetime.now().strftime("%Y%m%d%H%M")
@@ -319,5 +376,47 @@ class Receiver():
         s.close()
  
 if __name__ == '__main__':
-    backup = Receiver("0.0.0.0", 5001, '/srv/dev-disk-by-label-Data/Main/Central_repository')
-    backup.start()
+    
+    weekdays = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday','daily']
+    
+    parser = argparse.ArgumentParser(formatter_class=argparse.RawTextHelpFormatter)
+
+    parser.add_argument("-a", "--address", help="The IP address to listen on, use 0.0.0.0 to listen on all", metavar ="", type=str, required=False, default="0.0.0.0")
+    parser.add_argument("-p", "--port", help="Port to listen on - must be same as client is sending on, default 5001", metavar ="", type=int, required=False, default=5001)
+    parser.add_argument("-f", "--folder", help="Target folder to backup to/sync with the client (relative path)", metavar ="", type=str, required=True)
+    parser.add_argument("-d", "--days", help="Which days to carry out backup on", metavar ="", type=str, required=True, nargs="+", choices=weekdays)
+    parser.add_argument("-t", "--timerange", help="Start time and end time to carry out the backup in 24h format, no symbols (allow enough time for files to upload)", required=True, type=str, nargs=2)
+
+    args = parser.parse_args()
+    
+    print(args)
+    print("====")
+
+    receiver = Receiver(
+        vars(args)['address'],
+        vars(args)['port'],
+        vars(args)['days'],
+        vars(args)['timerange'],
+        vars(args)['folder'],
+    )
+    
+    print("\n----------")
+    print("Receiver parameters\n")
+    print(f"Receive address: {receiver.SERVER_HOST}")
+    print(f"Port: {receiver.SERVER_PORT}")
+    print(f"Backup days: {receiver.backup_day}")
+    print(f"Backup time window: {receiver.backup_timerange}")
+    print(f"Target folder: {receiver.backup_dir}")
+    print("----------\n")
+    
+    run_receiver = input("Run Receiver now? y/n\n>>>")
+    if run_receiver == "y":
+        receiver.run_scheduler()
+    else:
+        print("Exiting...")
+        exit()
+    
+    
+    
+    # backup = Receiver("0.0.0.0", 5001, '/srv/dev-disk-by-label-Data/Main/Central_repository')
+    # backup.start()
