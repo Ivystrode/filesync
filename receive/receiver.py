@@ -8,6 +8,7 @@ import ntpath
 import time
 import argparse
 import calendar
+import multiprocessing
  
 class Receiver():
  
@@ -20,6 +21,8 @@ class Receiver():
         
         self.backup_day = backup_day
         self.backup_timerange = backup_timerange
+        
+        self.backup_complete = False
         
         weekdays = ['sunday','monday','tuesday','wednesday','thursday','friday','saturday']
         if type(backup_day) != list:
@@ -52,6 +55,9 @@ class Receiver():
         self.sendback_port = 5002
         
         self.backup_in_progress = False
+        
+        self.backup_process = multiprocessing.Process(name="backup_process", target=self.start)
+        self.socket_killer_process = multiprocessing.Process(name="socket_killer_process", target=self.socket_killer)
  
         self.backup_dir = backup_dir + "/"
         print(f"BACKUP DIR IS {self.backup_dir}")
@@ -61,91 +67,146 @@ class Receiver():
         self.logfile = ""
         
     def run_scheduler(self):
-        print("[*] Receiver: Awaiting backup window")
+        print("[*] Receiver: Scheduler active. Awaiting backup window.")
         print(f"Address: {self.SERVER_HOST}")
         print(f"Port: {self.SERVER_PORT}")
         print(f"Day: {self.backup_day}")
         print(f"Timerange: {self.backup_timerange}")
         print(f"Target: {self.backup_dir}\n")
         
-        backup_complete = False
+        started = False
+        
+        # backup_complete = False
         
         while True:
             date_today = datetime.now().strftime("%d-%m-%Y")
             weekday_number = datetime.strptime(date_today, '%d-%m-%Y').weekday()
             today = calendar.day_name[weekday_number]
             
-            for day in self.backup_day:
-                if day.lower() == today.lower():
-                    # print(f"{day} - Backup commence at: {self.backup_timerange[0]}")
+            while not self.backup_complete and not started:
+                # print("waiting for backup")
+                time.sleep(1)
+                # if self.backup_process.is_alive():
+                #     print("OH GAWD BACKUP THREAD STILLL ALIVE")
+                #     self.backup_process.terminate()
+                #     print("killed...")
+                # else:
+                #     print("backup process dead thank god")
+                for day in self.backup_day:
+                    if day.lower() == today.lower():
+                        # print(f"{day} - Backup commence at: {self.backup_timerange[0]}")
 
-                    if self.backup_timerange[0] <= datetime.now().strftime("%H%M") < self.backup_timerange[1]:
-                        print("[+] Backup window open")
-                        self.start()
+                        if self.backup_timerange[0] <= datetime.now().strftime("%H%M") < self.backup_timerange[1]:
+                            print("[+] Backup window open")
+                            # self.start() # need to be separate thread that is stopped by socket killer ??? +++++++++++++++++++++++++++++++++
+                            self.backup_process.start()
+                            started = True
+                            # self.backup_complete = True
+                            # print("[+] Backup loop complete - will start again at next window")
+                            # threading.Thread(target=self.socket_killer).stop()
+                            
+            if self.backup_complete and datetime.now().strftime("%H%M") > self.backup_timerange[1]:
+                self.backup_complete = False
+                started = False
+                # if self.socket_killer_thread.is_alive():
+                #     self.socket_killer_thread.stop()
+                print("[!] Resetting backup complete status to False")
+                # self.run_scheduler()
+    
+    def socket_killer(self, socket):
+        print(f"[*] Socket killer: Monitoring {socket}")
+        while not self.backup_complete:
+            if datetime.now().strftime("%H%M") > self.backup_timerange[1] and not self.backup_in_progress:
+                print("[-] Backup window closed, no client connection attempts detected")
+                socket.close()
+                self.backup_complete = True
+                break
+        print(socket)
+        self.run_scheduler()
+        self.socket_killer_process.terminate()
+        # try:
+        #     self.backup_process.terminate()
+        #     print("terminated")
+        # except:
+        #     self.backup_process.start()
+        #     print("started")
+        # finally:
+        #     self.backup_process.join()
+        #     print("joined")
+        # print("[*] Listener stopper terminated")
                 
             
             
             
  
     def start(self):
+        
+                    
         s = socket.socket()
         s.bind((self.SERVER_HOST, 5002))
         s.listen(5)
         
         print(f"[+] {socket.gethostname()}: Listening for client connections...")
- 
- 
-        timenow = datetime.now().strftime("%Y%m%d%H%M")
- 
-        client_socket, address = s.accept()
-        self.sendback_address = address[0]
-        self.client_name = socket.gethostbyaddr(address[0])[0]
-        self.logfile = f"{timenow}_{self.client_name}_Receive_Log.txt"
         
-        # print(self.sendback_address)
-        # print(self.client_name)
-        print(f"[+] Client {self.client_name}: {self.sendback_address} has established a connection")
-        print("[*] Awaiting client manifest...")
+        # start thread listener stopper+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+        # threading.Thread(target=self.socket_killer, args=[s]).start()
+        # self.socket_killer_thread.start(args=[s])
+        self.socket_killer_process = multiprocessing.Process(name = "socket_killer_process", target=self.socket_killer, args=[s]).start()
  
-        with open(self.logfile, "w") as f:
-            f.write(f"====BEGIN RECEIVE OPERATION=====\n\nDTG: {timenow}\nDirectory: {self.backup_dir}\nClient: {self.client_name} ({self.sendback_address})\n\n")
- 
-        received = client_socket.recv(self.BUFFER_SIZE).decode()
-        print("\n\n++++++++Receiving client manifest++++++++\n")
-        print(received)
-        print("\n++++++++Receiving client manifest++++++++\n\n")
-        path, filesize = received.split(self.SEPARATOR)
- 
-        filename = os.path.basename(path)
-        filesize = int(filesize)
- 
-        if 'client_manifest' not in path:
-            print("[!] Not a recognised manifest")
-            with open(self.logfile, "a") as f:
-                f.write("[!] Invalid client manifest")
-            exit()
- 
-        else:
-            progress = tqdm(range(filesize), f"Receiving {filename}", unit="B", unit_scale=True, unit_divisor=1024)
-            with open(filename, "wb") as f: 
-                for _ in progress:
-                    bytes_read = client_socket.recv(self.BUFFER_SIZE)
-                    if not bytes_read:
- 
-                        break
-                    f.write(bytes_read)
-                    progress.update(len(bytes_read))
-            client_manifest = filename
-            print(f"[+] Client manifest received: {client_manifest}")
- 
-        server_manifest = self.check_client_manifest(client_manifest)
-        self.send_server_manifest(server_manifest)
-        client_socket.close()
-        s.close()
-        # TO TRY AND STOP ERRNO 98 - ADDRESS ALREADY IN USE:
-        print("[*] Pausing for client...")
-        time.sleep(1)
-        self.receive()
+        try:
+            client_socket, address = s.accept()
+            self.sendback_address = address[0]
+            timenow = datetime.now().strftime("%Y%m%d%H%M")
+            self.client_name = socket.gethostbyaddr(address[0])[0]
+            self.logfile = f"{timenow}_{self.client_name}_Receive_Log.txt"
+            
+            # print(self.sendback_address)
+            # print(self.client_name)
+            print(f"[+] Client {self.client_name}: {self.sendback_address} has established a connection")
+            self.backup_in_progress = True
+            print("[*] Awaiting client manifest...")
+    
+            with open(self.logfile, "w") as f:
+                f.write(f"====BEGIN RECEIVE OPERATION=====\n\nDTG: {timenow}\nDirectory: {self.backup_dir}\nClient: {self.client_name} ({self.sendback_address})\n\n")
+    
+            received = client_socket.recv(self.BUFFER_SIZE).decode()
+            print("\n\n++++++++Receiving client manifest++++++++\n")
+            print(received)
+            print("\n++++++++Receiving client manifest++++++++\n\n")
+            path, filesize = received.split(self.SEPARATOR)
+    
+            filename = os.path.basename(path)
+            filesize = int(filesize)
+    
+            if 'client_manifest' not in path:
+                print("[!] Not a recognised manifest")
+                with open(self.logfile, "a") as f:
+                    f.write("[!] Invalid client manifest")
+                exit()
+    
+            else:
+                progress = tqdm(range(filesize), f"Receiving {filename}", unit="B", unit_scale=True, unit_divisor=1024)
+                with open(filename, "wb") as f: 
+                    for _ in progress:
+                        bytes_read = client_socket.recv(self.BUFFER_SIZE)
+                        if not bytes_read:
+    
+                            break
+                        f.write(bytes_read)
+                        progress.update(len(bytes_read))
+                client_manifest = filename
+                print(f"[+] Client manifest received: {client_manifest}")
+    
+            server_manifest = self.check_client_manifest(client_manifest)
+            self.send_server_manifest(server_manifest)
+            client_socket.close()
+            s.close()
+            # TO TRY AND STOP ERRNO 98 - ADDRESS ALREADY IN USE:
+            print("[*] Pausing for client...")
+            time.sleep(1)
+            self.receive()
+        except:
+            print("[!] Receiver Loop exited")
  
     def check_client_manifest(self, client_manifest):
         print(f"[*] Checking client manifest: {client_manifest}...")

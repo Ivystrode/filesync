@@ -9,3 +9,5 @@ Transmit_logs/
 Receive_logs/
 __pycache__/
 *Transmit_log
+.vscode
+.mypy*

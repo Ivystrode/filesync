@@ -88,6 +88,7 @@ class Transmitter():
             
             while not backup_complete:
                 valid_timerange = False
+                # print("put some prints in here to test looping if backup doesnt work...")
                 for timing in self.backup_timerange:
                     try:
                         datetime.strptime(timing, "%H%M")
@@ -148,10 +149,14 @@ class Transmitter():
                                     #right now it seems like it will keep looping but the script freezes because it can't duplicate the logfile
                                     # SOLUTION: time.sleep(60) at least so at least the logfile will be named differently and won't freeze the script?
                                     # that way at least it will keep trying
+                                    print("error, waiting 1 minute")
                                     time.sleep(61)
+                                    print("waiting done")
+                                    # self.run_scheduler()
                                     # tried complicated methods of creating new log files each times it tries but...its just not worth it when this works
                                     
-                            if timenow >= self.backup_timerange[1] and backup_complete:
+                            # if timenow >= self.backup_timerange[1]: #and backup_complete:
+                            if datetime.now().strftime("%H%M") >= self.backup_timerange[1]: #and backup_complete:
                                 print("Backup window closed")
                                 backup_complete = False
                                     
@@ -352,7 +357,7 @@ class Transmitter():
                             f.write(f"\n[+] File sent on attempt 1: {file}")
                             
                     except:
-                        for interval in range(1,60):
+                        for interval in range(1,12):
                             try:
                                 print(f"\n[!] Connection busy, retrying in {str(interval)} seconds...\n")
                                 time.sleep(interval)
