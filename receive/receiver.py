@@ -205,8 +205,9 @@ class Receiver():
             print("[*] Pausing for client...")
             time.sleep(1)
             self.receive()
-        except:
+        except Exception as e:
             print("[!] Receiver Loop exited")
+            print(e)
  
     def check_client_manifest(self, client_manifest):
         print(f"[*] Checking client manifest: {client_manifest}...")

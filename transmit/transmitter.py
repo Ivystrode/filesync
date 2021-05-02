@@ -6,6 +6,7 @@ import calendar
 import os
 import shutil
 import argparse
+from plyer import notification
 
 class Transmitter():
     
@@ -72,6 +73,29 @@ class Transmitter():
             print("\n[!] Invalid backup directory\n")
             print("Path does not exist")
             exit()
+            
+    def display_notification(*args):
+        
+        """Display customisable notification, depending on user OS"""
+        
+        
+        if len(args) > 2:
+            title = args[1]
+            body = args[2]
+        else:
+            title = "Filesync"
+            body = args[1]
+        print(args)
+        print(title)
+        print(body)
+        
+        notification.notify(title=title, message=body)
+
+        # once win10toast is put in, this should go to init function...NOPE, plyer apparently works cross platform
+        # if "linux" in platform.system().lower():
+        #     notification = Notify.Notification.new(title, body)
+        #     notification.show()
+        
         
 
         
@@ -82,6 +106,10 @@ class Transmitter():
         before continuing.
         """
         backup_complete = False
+        
+        self.display_notification("Transmitter scheduler is now active")
+
+        
     
         while True:
             timenow = datetime.now().strftime("%H%M")
@@ -105,7 +133,7 @@ class Transmitter():
                     
                     for day in self.backup_day:
                         if day.lower() == today.lower(): #and timenow < self.backup_timerange[0]: # why was this here in the first place???
-                            # print(f"{day}: Backup will commence at: {self.backup_timerange[0]}")
+                            print(f"{day}: Backup will commence at: {self.backup_timerange[0]}")
                             
                             
                             if self.backup_timerange[0] <= datetime.now().strftime("%H%M") < self.backup_timerange[1]:
@@ -116,6 +144,7 @@ class Transmitter():
                                     # add this try/except block to a separate function so that a backup can be run singly rather than on a schedule
                                     # as well, so that user has another option/mthod of backup
                                     print("[*] Beginning backup")
+                                    self.display_notification("Beginning file transmission")
                                     logfiletime = datetime.now().strftime("%Y%m%d%H%M")
                                     self.logfile = f"{logfiletime}_{self.host}_Transmit_Log.txt"
                                     
@@ -127,6 +156,7 @@ class Transmitter():
                                     self.start_backup(server_manifest)
                                     backup_complete = True
                                     print("[+] Backup complete")
+                                    self.display_notification("Backup successful.")
                                     
                                     with open(self.logfile, "a") as f:
                                         f.write("\n\n=====END TRANSMIT OPERATION=====\n")
@@ -138,6 +168,7 @@ class Transmitter():
                                 except Exception as err:
                                     print("[!] BACKUP ERROR:")
                                     print(err)
+                                    self.display_notification(f"Transmission error: {err}")
                                     with open(self.logfile, "a") as f:
                                         f.write(f"[!] BACKUP ERROR: {err}\n")
                                         f.write("\n\n=====END TRANSMIT OPERATION=====\n")
@@ -154,10 +185,12 @@ class Transmitter():
                                     print("waiting done")
                                     # self.run_scheduler()
                                     # tried complicated methods of creating new log files each times it tries but...its just not worth it when this works
-                                    
+                            print("got here")
                             # if timenow >= self.backup_timerange[1]: #and backup_complete:
                             if datetime.now().strftime("%H%M") >= self.backup_timerange[1]: #and backup_complete:
                                 print("Backup window closed")
+                                if not backup_complete:                                
+                                    self.display_notification("Transmitter window closed - backup unsuccessful")
                                 backup_complete = False
                                     
                         # else:
@@ -170,6 +203,10 @@ class Transmitter():
                     exit()
                         
                 time.sleep(5)
+            if day.lower() == today.lower() and datetime.now().strftime("%H%M") >= self.backup_timerange[1]: #and backup_complete:
+                print("Backup window closed")
+                backup_complete = False
+            print(f"Backup complete status now: {backup_complete}")
             
 
                 
@@ -197,7 +234,7 @@ class Transmitter():
                         file_namepath = item[0] + "\\" + file
                         if not any(filename.lower() in file_namepath.lower() for filename in self.ignorelist):
                             # file_modded_date =  time.ctime(os.path.getmtime(item[0] + "\\" + file))
-                            file_modded_date =  os.path.getmtime(item[0] + "\\" + file)
+                            file_modded_date =  os.path.getmtime(item[0] + "/" + file)
                             # file_modded_date =  os.path.getmtime(item[0] + "\\" + file)
                             filecount += 1
                             with open("client_manifest.txt", "a") as f:
@@ -208,7 +245,7 @@ class Transmitter():
                     for file in item[2]:
                         file_namepath = item[0] + "\\" + file
                         # file_modded_date =  time.ctime(os.path.getmtime(item[0] + "\\" + file))
-                        file_modded_date =  os.path.getmtime(item[0] + "\\" + file)
+                        file_modded_date =  os.path.getmtime(item[0] + "/" + file)
                         # file_modded_date =  os.path.getmtime(item[0] + "\\" + file)
                         filecount += 1
                         with open("client_manifest.txt", "a") as f:
@@ -301,7 +338,7 @@ class Transmitter():
         s.send(f"{filename}{self.SEPARATOR}{filesize}".encode())
         if "client_manifest" in filename:
             print("[*] Pausing for receiver...")
-            time.sleep(2)
+            time.sleep(0.3)
 
         if filename != "SENDCOMPLETE":
             try:
@@ -411,6 +448,7 @@ class Transmitter():
             f.write(f"\n[-] Connection closed to: {self.host}:{self.port}")
         self.files_sent = 0
         self.files_unknown = 0
+        self.display_notification(f"Transmission complete: {self.files_sent} files sent, {self.files_unknown} requested files not located - connection to {self.host} closed.")
     
 
 if __name__ == '__main__':
